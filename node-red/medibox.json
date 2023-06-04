@@ -1,0 +1,875 @@
+[
+    {
+        "id": "9fc70cf43a34da9e",
+        "type": "tab",
+        "label": "Main",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0a88e55d99fec423",
+        "type": "ui_tab",
+        "name": "Medibox",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "26e5ddc788e77e61",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0eb8c0",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#097479",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "0c25cce393ada22c",
+        "type": "ui_group",
+        "name": "Main Buzzer",
+        "tab": "0a88e55d99fec423",
+        "order": 1,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6a062b302758abd6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "294a1eee0dddf98a",
+        "type": "ui_group",
+        "name": "Schedule",
+        "tab": "0a88e55d99fec423",
+        "order": 2,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "beca1c88f0500908",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Main Switch",
+        "tooltip": "Toggle the main buzzer",
+        "group": "0c25cce393ada22c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "mi-power_settings_new",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "mi-power_settings_new",
+        "offcolor": "grey",
+        "animate": true,
+        "className": "",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "fb3cab73d66b23a3"
+            ]
+        ],
+        "icon": "font-awesome/fa-power-off"
+    },
+    {
+        "id": "fb3cab73d66b23a3",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Main Switch",
+        "rules": [
+            {
+                "t": "set",
+                "p": "main_buzzer",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 120,
+        "wires": [
+            [
+                "e289d1a3be4702f9"
+            ]
+        ]
+    },
+    {
+        "id": "e289d1a3be4702f9",
+        "type": "mqtt out",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "topic": "190622R/main_buzzer",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6a062b302758abd6",
+        "x": 880,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "1a98b51757a8106e",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Schedule",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 360,
+        "y": 200,
+        "wires": [
+            [
+                "1116c0d9e5f7053e"
+            ]
+        ]
+    },
+    {
+        "id": "541c2d3fa8c4f6ee",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Days",
+        "tooltip": "Number of days to repeat the Medibox scheduler",
+        "group": "294a1eee0dddf98a",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "wrap": true,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "step": 1,
+        "className": "",
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "07f0cd8c5a36f0a2"
+            ]
+        ]
+    },
+    {
+        "id": "3793da67a454e187",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Trigger at 12:00 AM",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 180,
+        "y": 280,
+        "wires": [
+            [
+                "453bdc4399fa7ff2"
+            ]
+        ]
+    },
+    {
+        "id": "07f0cd8c5a36f0a2",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Days Count",
+        "rules": [
+            {
+                "t": "set",
+                "p": "days",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "453bdc4399fa7ff2",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Reduce Days Count by 1",
+        "func": "let days = flow.get(\"days\");\ndays = Math.max(days-1, 0);\nmsg.payload = days;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"days\", 6)",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "541c2d3fa8c4f6ee"
+            ]
+        ]
+    },
+    {
+        "id": "b62f4022cb5a36cd",
+        "type": "ui_text_input",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 4,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "time",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 400,
+        "y": 360,
+        "wires": [
+            [
+                "6a045f37d18b6178"
+            ]
+        ]
+    },
+    {
+        "id": "40e2022084843a44",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 3,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "67a2fb872d75478b"
+            ]
+        ]
+    },
+    {
+        "id": "1116c0d9e5f7053e",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Schedule",
+        "rules": [
+            {
+                "t": "set",
+                "p": "schedule",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a045f37d18b6178",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Alarm 1 Time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm_1_time",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67a2fb872d75478b",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Alarm 1 Enable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm_1_en",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89ce0781a63ae87c",
+        "type": "debug",
+        "z": "9fc70cf43a34da9e",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "db0e512141d04ab9",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Processing Alarms",
+        "func": "let date = new Date();\nlet hour = date.getHours();\nlet minute = date.getMinutes();\nlet schedule = flow.get(\"schedule\");\nlet days = flow.get(\"days\");\n\n// Alarm 1\nlet alarm_1_en = flow.get(\"alarm_1_en\");\nlet alarm_1_date = new Date(flow.get(\"alarm_1_time\"));\n\n// Alarm 2\nlet alarm_2_en = flow.get(\"alarm_2_en\");\nlet alarm_2_date = new Date(flow.get(\"alarm_2_time\"));\n\n// Alarm 3\nlet alarm_3_en = flow.get(\"alarm_3_en\");\nlet alarm_3_date = new Date(flow.get(\"alarm_3_time\"));\n\nconst alarm_hours = [alarm_1_date.getHours(), alarm_2_date.getHours(), alarm_3_date.getHours()];\nconst alarm_minutes = [alarm_1_date.getMinutes(), alarm_2_date.getMinutes(), alarm_3_date.getMinutes()];\nconst alarm_en = [alarm_1_en, alarm_2_en, alarm_3_en];\n\nif (schedule && days > 0) {\n    for (let i = 0; i < 3; i++) {\n        if (alarm_en[i] && alarm_hours[i] == hour && alarm_minutes[i] == minute) {\n            msg.payload = i;\n            return msg;\n        }\n    }\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"schedule\", false);\nflow.set(\"alarm_1_time\", 0);\nflow.set(\"alarm_1_en\", false);",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 700,
+        "wires": [
+            [
+                "89ce0781a63ae87c"
+            ]
+        ]
+    },
+    {
+        "id": "be35760e88cc36ac",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 700,
+        "wires": [
+            [
+                "db0e512141d04ab9"
+            ]
+        ]
+    },
+    {
+        "id": "7f508048cfb8fc44",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 500,
+        "wires": [
+            [
+                "40e2022084843a44",
+                "4565835e8865e793",
+                "2568156f3c50e4be"
+            ]
+        ]
+    },
+    {
+        "id": "a8a2199890b89288",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "-19800000",
+        "payloadType": "num",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "b62f4022cb5a36cd",
+                "bad9bc05f76c72c6",
+                "4dfa6ae0b6cf42bd"
+            ]
+        ]
+    },
+    {
+        "id": "d3eae5795982da24",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "beca1c88f0500908",
+                "1a98b51757a8106e"
+            ]
+        ]
+    },
+    {
+        "id": "bad9bc05f76c72c6",
+        "type": "ui_text_input",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 6,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "time",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "87473a252821ee4d"
+            ]
+        ]
+    },
+    {
+        "id": "4565835e8865e793",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 5,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "2297b4269b3d0722"
+            ]
+        ]
+    },
+    {
+        "id": "87473a252821ee4d",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Alarm 2 Time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm_2_time",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2297b4269b3d0722",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Alarm 2 Enable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm_2_en",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4dfa6ae0b6cf42bd",
+        "type": "ui_text_input",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 8,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "time",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 400,
+        "y": 560,
+        "wires": [
+            [
+                "7779c0a261738e0d"
+            ]
+        ]
+    },
+    {
+        "id": "2568156f3c50e4be",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "group": "294a1eee0dddf98a",
+        "order": 7,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 390,
+        "y": 600,
+        "wires": [
+            [
+                "1cc3080926f60b43"
+            ]
+        ]
+    },
+    {
+        "id": "7779c0a261738e0d",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Alarm 3 Time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm_3_time",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1cc3080926f60b43",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Alarm 3 Enable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm_3_en",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    }
+]

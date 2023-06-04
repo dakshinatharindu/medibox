@@ -9,7 +9,10 @@ PubSubClient mqttClient(espClient);
 const char *mqqttBroker = "test.mosquitto.org";
 const int mqttPort = 1883;
 const char *mqttClientID = "ESP32-Medibox";
-const char *mqttSubTopic = "dakshina-pub";
+const char *mqttSubTopic = "190622R/main_buzzer";
+
+// Variables
+bool main_switch = true;
 
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
     char payloadCharArr[length];
@@ -18,7 +21,13 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
         payloadCharArr[i] = (char)payload[i];
     }
 
-    // Handle payload
+    if (payloadCharArr[0] == 't') {
+        main_switch = true;
+    } else if (payloadCharArr[0] == 'f') {
+        main_switch = false;
+    }
+    Serial.print("Main Switch: "); 
+    Serial.println(main_switch);
 }
 
 void setupMQTT() {
