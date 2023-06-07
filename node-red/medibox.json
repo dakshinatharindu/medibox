@@ -163,6 +163,17 @@
         "className": ""
     },
     {
+        "id": "87270550e434eb03",
+        "type": "ui_group",
+        "name": "Temperature",
+        "tab": "0a88e55d99fec423",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "beca1c88f0500908",
         "type": "ui_switch",
         "z": "9fc70cf43a34da9e",
@@ -220,7 +231,7 @@
         "y": 120,
         "wires": [
             [
-                "e289d1a3be4702f9"
+                "8ac89e6c867a24a5"
             ]
         ]
     },
@@ -228,8 +239,8 @@
         "id": "e289d1a3be4702f9",
         "type": "mqtt out",
         "z": "9fc70cf43a34da9e",
-        "name": "",
-        "topic": "190622R/main_buzzer",
+        "name": "MQTT Out",
+        "topic": "",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -238,7 +249,7 @@
         "correl": "",
         "expiry": "",
         "broker": "6a062b302758abd6",
-        "x": 880,
+        "x": 1110,
         "y": 120,
         "wires": []
     },
@@ -377,7 +388,7 @@
         "id": "b62f4022cb5a36cd",
         "type": "ui_text_input",
         "z": "9fc70cf43a34da9e",
-        "name": "",
+        "name": "Alarm 1 Time",
         "label": "",
         "tooltip": "",
         "group": "294a1eee0dddf98a",
@@ -391,7 +402,7 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 400,
+        "x": 410,
         "y": 360,
         "wires": [
             [
@@ -403,7 +414,7 @@
         "id": "40e2022084843a44",
         "type": "ui_switch",
         "z": "9fc70cf43a34da9e",
-        "name": "",
+        "name": "Alarm 1 Switch",
         "label": "",
         "tooltip": "",
         "group": "294a1eee0dddf98a",
@@ -425,7 +436,7 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 390,
+        "x": 420,
         "y": 400,
         "wires": [
             [
@@ -509,22 +520,6 @@
         ]
     },
     {
-        "id": "89ce0781a63ae87c",
-        "type": "debug",
-        "z": "9fc70cf43a34da9e",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 600,
-        "y": 700,
-        "wires": []
-    },
-    {
         "id": "db0e512141d04ab9",
         "type": "function",
         "z": "9fc70cf43a34da9e",
@@ -539,7 +534,7 @@
         "y": 700,
         "wires": [
             [
-                "89ce0781a63ae87c"
+                "1ed0e741f7a06f70"
             ]
         ]
     },
@@ -557,11 +552,11 @@
                 "vt": "str"
             }
         ],
-        "repeat": "3",
+        "repeat": "10",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "190622R/scheduler",
         "payload": "",
         "payloadType": "date",
         "x": 150,
@@ -634,13 +629,17 @@
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
         "repeat": "",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "190622R/main_buzzer",
         "payload": "false",
         "payloadType": "bool",
         "x": 150,
@@ -656,7 +655,7 @@
         "id": "bad9bc05f76c72c6",
         "type": "ui_text_input",
         "z": "9fc70cf43a34da9e",
-        "name": "",
+        "name": "Alarm 2 Time",
         "label": "",
         "tooltip": "",
         "group": "294a1eee0dddf98a",
@@ -670,7 +669,7 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 400,
+        "x": 410,
         "y": 460,
         "wires": [
             [
@@ -682,7 +681,7 @@
         "id": "4565835e8865e793",
         "type": "ui_switch",
         "z": "9fc70cf43a34da9e",
-        "name": "",
+        "name": "Alarm 2 Switch",
         "label": "",
         "tooltip": "",
         "group": "294a1eee0dddf98a",
@@ -704,7 +703,7 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 390,
+        "x": 420,
         "y": 500,
         "wires": [
             [
@@ -766,7 +765,7 @@
         "id": "4dfa6ae0b6cf42bd",
         "type": "ui_text_input",
         "z": "9fc70cf43a34da9e",
-        "name": "",
+        "name": "Alarm 2 Time",
         "label": "",
         "tooltip": "",
         "group": "294a1eee0dddf98a",
@@ -780,7 +779,7 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 400,
+        "x": 410,
         "y": 560,
         "wires": [
             [
@@ -792,7 +791,7 @@
         "id": "2568156f3c50e4be",
         "type": "ui_switch",
         "z": "9fc70cf43a34da9e",
-        "name": "",
+        "name": "Alarm 2 Switch",
         "label": "",
         "tooltip": "",
         "group": "294a1eee0dddf98a",
@@ -814,7 +813,7 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 390,
+        "x": 420,
         "y": 600,
         "wires": [
             [
@@ -871,5 +870,147 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "856df2095393af2b",
+        "type": "link in",
+        "z": "9fc70cf43a34da9e",
+        "name": "mqtt_out",
+        "links": [
+            "1ed0e741f7a06f70",
+            "8ac89e6c867a24a5"
+        ],
+        "x": 975,
+        "y": 120,
+        "wires": [
+            [
+                "e289d1a3be4702f9"
+            ]
+        ]
+    },
+    {
+        "id": "8ac89e6c867a24a5",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "main_buzzer_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 715,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "1ed0e741f7a06f70",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "alarm_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 545,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "c5a06525e18a0bb1",
+        "type": "mqtt in",
+        "z": "9fc70cf43a34da9e",
+        "name": "MQTT In",
+        "topic": "190622R/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6a062b302758abd6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 980,
+        "wires": [
+            [
+                "e652ac6157f67280"
+            ]
+        ]
+    },
+    {
+        "id": "802467b9be1bec14",
+        "type": "debug",
+        "z": "9fc70cf43a34da9e",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "e652ac6157f67280",
+        "type": "switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "Switch Topic",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "190622R/temp",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "190622R/humidity",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 980,
+        "wires": [
+            [
+                "b50b5060733d4233"
+            ],
+            [
+                "802467b9be1bec14"
+            ]
+        ]
+    },
+    {
+        "id": "b50b5060733d4233",
+        "type": "ui_gauge",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "group": "87270550e434eb03",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Gauge",
+        "label": "units",
+        "format": "{{value | number:2}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 610,
+        "y": 840,
+        "wires": []
     }
 ]
