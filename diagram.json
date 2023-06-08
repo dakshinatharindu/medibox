@@ -3,31 +3,35 @@
   "author": "Dakshina Tharindu",
   "editor": "wokwi",
   "parts": [
-    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -135, "left": -59.23, "attrs": {} },
-    {
-      "type": "wokwi-buzzer",
-      "id": "bz1",
-      "top": -126.07,
-      "left": -155.98,
-      "attrs": { "volume": "0.1" }
-    },
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -12, "left": -211.34, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -100.39, "left": -340.41, "attrs": {} },
     {
       "type": "wokwi-lcd2004",
       "id": "lcd1",
-      "top": -128.89,
-      "left": 124.69,
+      "top": -22.96,
+      "left": -1.32,
       "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 156.74,
+      "left": 8.77,
+      "attrs": { "volume": "0.1" }
     }
   ],
   "connections": [
     [ "esp:TX0", "$serialMonitor:RX", "", [] ],
     [ "esp:RX0", "$serialMonitor:TX", "", [] ],
-    [ "bz1:1", "esp:GND.1", "green", [ "v0" ] ],
-    [ "bz1:2", "esp:D15", "green", [ "v0" ] ],
-    [ "lcd1:GND", "esp:GND.1", "black", [ "h0" ] ],
-    [ "lcd1:VCC", "esp:3V3", "red", [ "h0" ] ],
-    [ "lcd1:SDA", "esp:D21", "green", [ "h0" ] ],
-    [ "lcd1:SCL", "esp:D22", "green", [ "h0" ] ]
+    [ "lcd1:GND", "esp:GND.1", "black", [ "h-61.77", "v51.24" ] ],
+    [ "lcd1:VCC", "esp:3V3", "red", [ "h-54.98", "v51.24" ] ],
+    [ "lcd1:SDA", "esp:D21", "green", [ "h-23.45", "v-53.86" ] ],
+    [ "lcd1:SCL", "esp:D22", "green", [ "h-16.17", "v-92.26" ] ],
+    [ "bz1:1", "esp:GND.1", "green", [ "v27.89", "h-120.2", "v-131.63" ] ],
+    [ "bz1:2", "esp:D15", "green", [ "v40.19", "h-138.81", "v-153.43" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht1:SDA", "esp:D13", "green", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ]
   ],
   "dependencies": {}
 }
