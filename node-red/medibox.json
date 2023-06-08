@@ -174,6 +174,17 @@
         "className": ""
     },
     {
+        "id": "2e6d468ca39b7433",
+        "type": "ui_group",
+        "name": "Humidity",
+        "tab": "0a88e55d99fec423",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "beca1c88f0500908",
         "type": "ui_switch",
         "z": "9fc70cf43a34da9e",
@@ -523,14 +534,14 @@
         "id": "db0e512141d04ab9",
         "type": "function",
         "z": "9fc70cf43a34da9e",
-        "name": "Processing Alarms",
+        "name": "Process Alarms",
         "func": "let date = new Date();\nlet hour = date.getHours();\nlet minute = date.getMinutes();\nlet schedule = flow.get(\"schedule\");\nlet days = flow.get(\"days\");\n\n// Alarm 1\nlet alarm_1_en = flow.get(\"alarm_1_en\");\nlet alarm_1_date = new Date(flow.get(\"alarm_1_time\"));\n\n// Alarm 2\nlet alarm_2_en = flow.get(\"alarm_2_en\");\nlet alarm_2_date = new Date(flow.get(\"alarm_2_time\"));\n\n// Alarm 3\nlet alarm_3_en = flow.get(\"alarm_3_en\");\nlet alarm_3_date = new Date(flow.get(\"alarm_3_time\"));\n\nconst alarm_hours = [alarm_1_date.getHours(), alarm_2_date.getHours(), alarm_3_date.getHours()];\nconst alarm_minutes = [alarm_1_date.getMinutes(), alarm_2_date.getMinutes(), alarm_3_date.getMinutes()];\nconst alarm_en = [alarm_1_en, alarm_2_en, alarm_3_en];\n\nif (schedule && days > 0) {\n    for (let i = 0; i < 3; i++) {\n        if (alarm_en[i] && alarm_hours[i] == hour && alarm_minutes[i] == minute) {\n            msg.payload = i;\n            return msg;\n        }\n    }\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"schedule\", false);\nflow.set(\"alarm_1_time\", 0);\nflow.set(\"alarm_1_en\", false);",
         "finalize": "",
         "libs": [],
-        "x": 390,
+        "x": 380,
         "y": 700,
         "wires": [
             [
@@ -927,30 +938,13 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 100,
-        "y": 980,
+        "x": 120,
+        "y": 1100,
         "wires": [
             [
                 "e652ac6157f67280"
             ]
         ]
-    },
-    {
-        "id": "802467b9be1bec14",
-        "type": "debug",
-        "z": "9fc70cf43a34da9e",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 580,
-        "y": 1080,
-        "wires": []
     },
     {
         "id": "e652ac6157f67280",
@@ -974,14 +968,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 270,
-        "y": 980,
+        "x": 290,
+        "y": 1100,
         "wires": [
             [
-                "b50b5060733d4233"
+                "73fe57b19578a7ef"
             ],
             [
-                "802467b9be1bec14"
+                "bc5b12d1d86ac51a"
             ]
         ]
     },
@@ -991,15 +985,15 @@
         "z": "9fc70cf43a34da9e",
         "name": "",
         "group": "87270550e434eb03",
-        "order": 0,
+        "order": 3,
         "width": 0,
         "height": 0,
         "gtype": "gage",
         "title": "Gauge",
-        "label": "units",
-        "format": "{{value | number:2}}",
+        "label": "",
+        "format": "{{value | number:0}}°C",
         "min": 0,
-        "max": 10,
+        "max": "50",
         "colors": [
             "#00b500",
             "#e6e600",
@@ -1009,8 +1003,632 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 610,
-        "y": 840,
+        "x": 970,
+        "y": 920,
         "wires": []
+    },
+    {
+        "id": "024815b118e084da",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Min",
+        "tooltip": "",
+        "group": "87270550e434eb03",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}°C",
+        "min": 0,
+        "max": "50",
+        "step": 1,
+        "className": "",
+        "x": 970,
+        "y": 1020,
+        "wires": [
+            [
+                "f554f64dcb9e68f0"
+            ]
+        ]
+    },
+    {
+        "id": "0ac361ad6a8a8c59",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Max",
+        "tooltip": "",
+        "group": "87270550e434eb03",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}°C",
+        "min": 0,
+        "max": "50",
+        "step": 1,
+        "className": "",
+        "x": 970,
+        "y": 1140,
+        "wires": [
+            [
+                "dd29625aee3067a9"
+            ]
+        ]
+    },
+    {
+        "id": "9b207f8b594f85a6",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 710,
+        "y": 920,
+        "wires": [
+            [
+                "b50b5060733d4233",
+                "820b9c482bb391ba"
+            ]
+        ]
+    },
+    {
+        "id": "354407f899f4f629",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 710,
+        "y": 1020,
+        "wires": [
+            [
+                "024815b118e084da",
+                "f554f64dcb9e68f0"
+            ]
+        ]
+    },
+    {
+        "id": "36143e21c83b2eb7",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "30",
+        "payloadType": "num",
+        "x": 710,
+        "y": 1140,
+        "wires": [
+            [
+                "0ac361ad6a8a8c59",
+                "dd29625aee3067a9"
+            ]
+        ]
+    },
+    {
+        "id": "f554f64dcb9e68f0",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Min Temo",
+        "rules": [
+            {
+                "t": "set",
+                "p": "min_temp",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd29625aee3067a9",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Max Temo",
+        "rules": [
+            {
+                "t": "set",
+                "p": "max_temp",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "73fe57b19578a7ef",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "temp",
+        "mode": "link",
+        "links": [
+            "b2b41000cb54d856"
+        ],
+        "x": 450,
+        "y": 1060,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "b2b41000cb54d856",
+        "type": "link in",
+        "z": "9fc70cf43a34da9e",
+        "name": "link in 1",
+        "links": [
+            "73fe57b19578a7ef"
+        ],
+        "x": 765,
+        "y": 960,
+        "wires": [
+            [
+                "b50b5060733d4233",
+                "380befb8ce334aa2",
+                "820b9c482bb391ba"
+            ]
+        ]
+    },
+    {
+        "id": "380befb8ce334aa2",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Process Temp",
+        "func": "let min_temp = flow.get(\"min_temp\");\nlet max_temp = parseInt(flow.get(\"max_temp\"));\nlet temp = parseInt(msg.payload)\n\nif (temp < min_temp) {\n    msg.payload = \"Current Temperature is lower than the Minimum Temperature\";\n    msg.topic = \"Temperature Warning\"\n    return msg;\n} else if (temp > max_temp) {\n    msg.payload = \"Current Temperature is higher than the Maximum Temperature\";\n    msg.topic = \"Temperature Warning\"\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 880,
+        "wires": [
+            [
+                "dcf154f097342287"
+            ]
+        ]
+    },
+    {
+        "id": "dcf154f097342287",
+        "type": "ui_toast",
+        "z": "9fc70cf43a34da9e",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Temperature Notification",
+        "x": 1230,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "820b9c482bb391ba",
+        "type": "ui_chart",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "group": "87270550e434eb03",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "cubic",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "50",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 970,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9b1cdbdbbfe53971",
+        "type": "ui_gauge",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "group": "2e6d468ca39b7433",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Gauge",
+        "label": "",
+        "format": "{{value | number:0}}%",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 970,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "5d00755a1bcd1288",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Min",
+        "tooltip": "",
+        "group": "2e6d468ca39b7433",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}%",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 970,
+        "y": 1440,
+        "wires": [
+            [
+                "d38d85ea203ccb05"
+            ]
+        ]
+    },
+    {
+        "id": "1e6dc296405f246b",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Max",
+        "tooltip": "",
+        "group": "2e6d468ca39b7433",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}%",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 970,
+        "y": 1560,
+        "wires": [
+            [
+                "bbc78dcc58257bd7"
+            ]
+        ]
+    },
+    {
+        "id": "cedde505dc5c8436",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 710,
+        "y": 1340,
+        "wires": [
+            [
+                "9b1cdbdbbfe53971",
+                "8ee368d5e75ce6c2"
+            ]
+        ]
+    },
+    {
+        "id": "e00cad335cc0b515",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "20",
+        "payloadType": "num",
+        "x": 710,
+        "y": 1440,
+        "wires": [
+            [
+                "5d00755a1bcd1288",
+                "d38d85ea203ccb05"
+            ]
+        ]
+    },
+    {
+        "id": "53517cb483dde4e9",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "50",
+        "payloadType": "num",
+        "x": 710,
+        "y": 1560,
+        "wires": [
+            [
+                "1e6dc296405f246b",
+                "bbc78dcc58257bd7"
+            ]
+        ]
+    },
+    {
+        "id": "d38d85ea203ccb05",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Min Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "min_humidity",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 1500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbc78dcc58257bd7",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Max Humidity",
+        "rules": [
+            {
+                "t": "set",
+                "p": "max_humidity",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1010,
+        "y": 1620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f9a92778bc326a1b",
+        "type": "link in",
+        "z": "9fc70cf43a34da9e",
+        "name": "link in 2",
+        "links": [
+            "bc5b12d1d86ac51a"
+        ],
+        "x": 765,
+        "y": 1380,
+        "wires": [
+            [
+                "9b1cdbdbbfe53971",
+                "1fa5555c9fee0ccd",
+                "8ee368d5e75ce6c2"
+            ]
+        ]
+    },
+    {
+        "id": "1fa5555c9fee0ccd",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Process Temp",
+        "func": "let min_humidity = flow.get(\"min_humidity\");\nlet max_humidity = parseInt(flow.get(\"max_humidity\"));\nlet humidity = parseInt(msg.payload)\n\nif (humidity < min_humidity) {\n    msg.payload = \"Current Humidity is lower than the Minimum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n} else if (humidity > max_humidity) {\n    msg.payload = \"Current Humidity is higher than the Maximum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1300,
+        "wires": [
+            [
+                "3fadb1c17ec634ff"
+            ]
+        ]
+    },
+    {
+        "id": "3fadb1c17ec634ff",
+        "type": "ui_toast",
+        "z": "9fc70cf43a34da9e",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Humidity Notification",
+        "x": 1220,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "8ee368d5e75ce6c2",
+        "type": "ui_chart",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "group": "2e6d468ca39b7433",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "cubic",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 970,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc5b12d1d86ac51a",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "humidity",
+        "mode": "link",
+        "links": [
+            "f9a92778bc326a1b"
+        ],
+        "x": 460,
+        "y": 1140,
+        "wires": [],
+        "l": true
     }
 ]
