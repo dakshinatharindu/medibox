@@ -8,8 +8,8 @@ const char *mqttClientID = "ESP32-Medibox";
 const char *mainBuzzerTopic = "190622R/main_buzzer";
 const char *schedulerTopic = "190622R/scheduler";
 
-MQTT::MQTT() {
-    this->mqttClient = PubSubClient(this->espClient);
+MQTT::MQTT(PubSubClient *mqttClient) {
+    this->mqttClient = *mqttClient;
     this->mqttClient.setServer(mqqttBroker, mqttPort);
     this->mqttClient.setCallback(this->mqttCallback);
 }
@@ -40,13 +40,13 @@ void MQTT::mqttCallback(char *topic, byte *payload, unsigned int length) {
     Serial.println("-----------------------");
 }
 
-void MQTT::connect() {
+void MQTT::loop() {
     while (!this->mqttClient.connected()) {
         Serial.print("Attempting MQTT connection...");
         if (this->mqttClient.connect(mqttClientID)) {
             Serial.println("connected");
-            // this->mqttClient.subscribe(mainBuzzerTopic);
-            // this->mqttClient.subscribe(schedulerTopic);
+            this->mqttClient.subscribe(mainBuzzerTopic);
+            this->mqttClient.subscribe(schedulerTopic);
         } else {
             Serial.print("failed, rc=");
             Serial.print(this->mqttClient.state());
@@ -54,6 +54,6 @@ void MQTT::connect() {
             delay(5000);
         }
     }
-    
+
     this->mqttClient.loop();
 }

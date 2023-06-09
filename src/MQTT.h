@@ -5,14 +5,18 @@
 
 class MQTT {
    private:
-    WiFiClient espClient;
+    // Attributes
     PubSubClient mqttClient;
-    bool main_switch = false;
 
+    // Methods
     static void mqttCallback(char *topic, byte *payload, unsigned int length);
 
    public:
-    MQTT();
+    // Attributes
+    bool main_switch = false;
+
+    // Methods
+    MQTT(PubSubClient *mqttClient);
     void init();
-    void connect();
+    void loop();
 };

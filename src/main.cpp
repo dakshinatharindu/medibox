@@ -1,16 +1,19 @@
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-
+#include <PubSubClient.h>
+#include <WiFi.h>
 
 // #include "_MQTT.h"
 // #include "_WiFi.h"
-#include "MQTT.h"
 #include "DHT.h"
+#include "MQTT.h"
 
 #define DHTPIN 13
 
+WiFiClient espClient;
+PubSubClient mqttClient(espClient);
 LiquidCrystal_I2C LCD = LiquidCrystal_I2C(0x27, 20, 4);
-MQTT mqtt = MQTT();
+MQTT mqtt = MQTT(&mqttClient);
 DHT dht = DHT(DHTPIN);
 
 void setup() {
@@ -21,19 +24,10 @@ void setup() {
     LCD.setCursor(0, 0);
     LCD.print("Hello World!");
     mqtt.init();
- 
-    // setupWiFi();
-    // setupMQTT();
-    
 }
 
 void loop() {
-    // if (!mqttClient.connected()) {
-    //     connectBroker();
-    // }
-    // mqttClient.loop();
-
-    mqtt.connect();
+    mqtt.loop();
     dht.sendData();
     delay(2000);
 }
