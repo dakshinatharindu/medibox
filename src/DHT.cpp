@@ -9,7 +9,7 @@ DHT::DHT(const int pin, MQTT* mqtt) {
     this->time = millis();
 }
 
-void DHT::sendData() {
+void DHT::loop() {
     // print data periodically
     if (millis() - this->time > DHT_PERIOD) {
         TempAndHumidity dhtData = this->dhtSensor.getTempAndHumidity();

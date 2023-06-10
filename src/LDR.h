@@ -8,8 +8,9 @@ class LDR {
     uint8_t pin;
     MQTT* mqtt;
     unsigned long time;
-
+    
    public:
     LDR(uint8_t pin, MQTT* mqtt);
-    void sendData();
+    void loop();
+    float intensity;
 };

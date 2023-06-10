@@ -14,7 +14,9 @@ class MQTT {
 
    public:
     // Attributes
-    bool main_switch = false;
+    static bool mainSwitch;
+    static int minAngle;
+    static float contrlingFactor;
 
     // Methods
     MQTT();

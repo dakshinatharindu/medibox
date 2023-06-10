@@ -14,5 +14,5 @@ class DHT {
 
    public:
     DHT(const int pin, MQTT* mqtt);
-    void sendData();
+    void loop();
 };

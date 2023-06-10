@@ -7,8 +7,14 @@ const int mqttPort = 1883;
 const char *mqttClientID = "ESP32-Medibox";
 const char *mainBuzzerTopic = "190622R/main_buzzer";
 const char *schedulerTopic = "190622R/scheduler";
+const char *minAngleTopic = "190622R/min_angle";
+const char *contrlingFactorTopic = "190622R/contrling_factor";
 
-MQTT::MQTT(): mqttClient(this->espClient) {
+bool MQTT::mainSwitch = false;
+int MQTT::minAngle = 30;
+float MQTT::contrlingFactor = 0.75;
+
+MQTT::MQTT() : mqttClient(this->espClient) {
     this->mqttClient.setServer(mqqttBroker, mqttPort);
     this->mqttClient.setCallback(this->mqttCallback);
 }
@@ -28,15 +34,25 @@ void MQTT::init() {
 }
 
 void MQTT::mqttCallback(char *topic, byte *payload, unsigned int length) {
-    Serial.print("Message arrived in topic: ");
-    Serial.println(topic);
+    char payloadCharArr[length];
 
-    Serial.print("Message:");
     for (int i = 0; i < length; i++) {
-        Serial.print((char)payload[i]);
+        payloadCharArr[i] = (char)payload[i];
     }
-    Serial.println();
-    Serial.println("-----------------------");
+
+    if (strcmp(topic, mainBuzzerTopic) == 0) {
+        if (payloadCharArr[0] == 't') {
+            mainSwitch = true;
+        } else if (payloadCharArr[0] == 'f') {
+            mainSwitch = false;
+        }
+    } else if (strcmp(topic, schedulerTopic) == 0) {
+        // TODO: Implement scheduler
+    } else if (strcmp(topic, minAngleTopic) == 0) {
+        minAngle = atoi(payloadCharArr);
+    } else if (strcmp(topic, contrlingFactorTopic) == 0) {
+        contrlingFactor = atof(payloadCharArr);
+    }
 }
 
 void MQTT::loop() {
@@ -46,6 +62,8 @@ void MQTT::loop() {
             Serial.println("connected");
             this->mqttClient.subscribe(mainBuzzerTopic);
             this->mqttClient.subscribe(schedulerTopic);
+            this->mqttClient.subscribe(minAngleTopic);
+            this->mqttClient.subscribe(contrlingFactorTopic);
         } else {
             Serial.print("failed, rc=");
             Serial.print(this->mqttClient.state());
