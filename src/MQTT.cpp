@@ -8,8 +8,7 @@ const char *mqttClientID = "ESP32-Medibox";
 const char *mainBuzzerTopic = "190622R/main_buzzer";
 const char *schedulerTopic = "190622R/scheduler";
 
-MQTT::MQTT(PubSubClient *mqttClient) {
-    this->mqttClient = *mqttClient;
+MQTT::MQTT(): mqttClient(this->espClient) {
     this->mqttClient.setServer(mqqttBroker, mqttPort);
     this->mqttClient.setCallback(this->mqttCallback);
 }

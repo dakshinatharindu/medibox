@@ -6,6 +6,7 @@
 class MQTT {
    private:
     // Attributes
+    WiFiClient espClient;
     PubSubClient mqttClient;
 
     // Methods
@@ -16,7 +17,7 @@ class MQTT {
     bool main_switch = false;
 
     // Methods
-    MQTT(PubSubClient *mqttClient);
+    MQTT();
     void init();
     void loop();
 };
