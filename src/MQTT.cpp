@@ -56,3 +56,15 @@ void MQTT::loop() {
 
     this->mqttClient.loop();
 }
+
+void MQTT::publish(const char *topic, const char *payload) {
+    this->mqttClient.publish(topic, payload);
+}
+
+void MQTT::publish(const char *topic, const int payload) {
+    this->mqttClient.publish(topic, String(payload).c_str());
+}
+
+void MQTT::publish(const char *topic, const float payload) {
+    this->mqttClient.publish(topic, String(payload).c_str());
+}

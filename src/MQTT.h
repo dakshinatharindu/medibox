@@ -20,4 +20,7 @@ class MQTT {
     MQTT();
     void init();
     void loop();
+    void publish(const char *topic, const char *payload);
+    void publish(const char *topic, const int payload);
+    void publish(const char *topic, const float payload);
 };

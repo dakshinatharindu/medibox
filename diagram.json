@@ -8,8 +8,8 @@
     {
       "type": "wokwi-lcd2004",
       "id": "lcd1",
-      "top": -22.96,
-      "left": -1.32,
+      "top": -20.88,
+      "left": 40.31,
       "attrs": { "pins": "i2c" }
     },
     {
@@ -18,6 +18,13 @@
       "top": 156.74,
       "left": 8.77,
       "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -182.46,
+      "left": -429.18,
+      "attrs": {}
     }
   ],
   "connections": [
@@ -25,13 +32,16 @@
     [ "esp:RX0", "$serialMonitor:TX", "", [] ],
     [ "lcd1:GND", "esp:GND.1", "black", [ "h-61.77", "v51.24" ] ],
     [ "lcd1:VCC", "esp:3V3", "red", [ "h-54.98", "v51.24" ] ],
-    [ "lcd1:SDA", "esp:D21", "green", [ "h-23.45", "v-53.86" ] ],
-    [ "lcd1:SCL", "esp:D22", "green", [ "h-16.17", "v-92.26" ] ],
+    [ "lcd1:SDA", "esp:D21", "green", [ "h-90.43", "v22.86" ] ],
+    [ "lcd1:SCL", "esp:D22", "green", [ "h-96.16", "v-15.54" ] ],
     [ "bz1:1", "esp:GND.1", "green", [ "v27.89", "h-120.2", "v-131.63" ] ],
-    [ "bz1:2", "esp:D15", "green", [ "v40.19", "h-138.81", "v-153.43" ] ],
-    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "bz1:2", "esp:D15", "green", [ "v40.19", "h-137.35", "v-153.43" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v199.82", "h228.71", "v-67.83" ] ],
     [ "dht1:SDA", "esp:D13", "green", [ "v0" ] ],
-    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ]
+    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "ldr1:AO", "esp:D34", "green", [ "h32.05", "v178.06" ] ],
+    [ "ldr1:VCC", "esp:3V3", "red", [ "h160.54", "v312.96" ] ],
+    [ "ldr1:GND", "esp:GND.2", "black", [ "h21.04", "v293.46" ] ]
   ],
   "dependencies": {}
 }
