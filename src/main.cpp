@@ -1,34 +1,34 @@
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
 
-
-#include "_MQTT.h"
-#include "_WiFi.h"
 #include "DHT.h"
+#include "LCD.h"
+#include "LDR.h"
+#include "MQTT.h"
+#include "ServoMotor.h"
 
-#define DHTPIN 13
+#define DHT_PIN 13
+#define LDR_PIN 34
+#define SERVO_PIN 18
 
-LiquidCrystal_I2C LCD = LiquidCrystal_I2C(0x27, 20, 4);
-DHT dht(DHTPIN);
+MQTT mqtt = MQTT();
+DHT dht = DHT(DHT_PIN, &mqtt);
+LCD lcd = LCD();
+LDR ldr = LDR(LDR_PIN, &mqtt);
+ServoMotor servo = ServoMotor(SERVO_PIN);
 
 void setup() {
+    // Init Serial
     Serial.begin(115200);
     delay(10);
-    LCD.init();
-    LCD.backlight();
-    LCD.setCursor(0, 0);
-    LCD.print("Hello World!");
-    setupWiFi();
-    setupMQTT();
-    
+
+    // Init modules
+    mqtt.init();
+    lcd.init();
 }
 
 void loop() {
-    if (!mqttClient.connected()) {
-        connectBroker();
-    }
-    mqttClient.loop();
-
-    dht.sendData();
-    delay(2000);
+    mqtt.loop();
+    dht.loop();
+    ldr.loop();
+    servo.loop(&ldr.intensity, &mqtt.minAngle, &mqtt.contrlingFactor);
 }
