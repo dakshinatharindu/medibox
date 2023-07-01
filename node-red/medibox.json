@@ -24,7 +24,7 @@
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": true,
+                "edited": false,
                 "reset": false
             },
             "darkTheme": {
@@ -119,7 +119,7 @@
         "name": "Main Buzzer",
         "tab": "0a88e55d99fec423",
         "order": 1,
-        "disp": false,
+        "disp": true,
         "width": "6",
         "collapse": false,
         "className": ""
@@ -185,6 +185,58 @@
         "className": ""
     },
     {
+        "id": "eb957972e6b992d9",
+        "type": "ui_group",
+        "name": "Light Intensity",
+        "tab": "0a88e55d99fec423",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "84b895dbf3a1702a",
+        "type": "ui_group",
+        "name": "Shade Controller",
+        "tab": "0a88e55d99fec423",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5f3173434023d3e4",
+        "type": "ui_tab",
+        "name": "Settings",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "99ad34ad8a935e95",
+        "type": "ui_group",
+        "name": "Buzzer",
+        "tab": "5f3173434023d3e4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f7a9cd67e59156f4",
+        "type": "ui_group",
+        "name": "Features",
+        "tab": "5f3173434023d3e4",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "beca1c88f0500908",
         "type": "ui_switch",
         "z": "9fc70cf43a34da9e",
@@ -197,8 +249,8 @@
         "height": 0,
         "passthru": true,
         "decouple": "false",
-        "topic": "topic",
-        "topicType": "msg",
+        "topic": "190622R/main_buzzer",
+        "topicType": "str",
         "style": "",
         "onvalue": "true",
         "onvalueType": "bool",
@@ -206,7 +258,7 @@
         "oncolor": "red",
         "offvalue": "false",
         "offvalueType": "bool",
-        "officon": "mi-power_settings_new",
+        "officon": "mi-mode_standby",
         "offcolor": "grey",
         "animate": true,
         "className": "",
@@ -260,8 +312,8 @@
         "correl": "",
         "expiry": "",
         "broker": "6a062b302758abd6",
-        "x": 1110,
-        "y": 120,
+        "x": 1730,
+        "y": 200,
         "wires": []
     },
     {
@@ -282,13 +334,13 @@
         "style": "",
         "onvalue": "true",
         "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
+        "onicon": "mi-alarm_on",
+        "oncolor": "#097479",
         "offvalue": "false",
         "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "animate": false,
+        "officon": "mi-alarm_off",
+        "offcolor": "grey",
+        "animate": true,
         "className": "",
         "x": 360,
         "y": 200,
@@ -370,7 +422,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
+        "x": 820,
         "y": 280,
         "wires": [
             []
@@ -439,13 +491,13 @@
         "style": "",
         "onvalue": "true",
         "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
+        "onicon": "mi-notifications_active",
+        "oncolor": "#097479",
         "offvalue": "false",
         "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "animate": false,
+        "officon": "mi-notifications_off",
+        "offcolor": "grey",
+        "animate": true,
         "className": "",
         "x": 420,
         "y": 400,
@@ -706,13 +758,13 @@
         "style": "",
         "onvalue": "true",
         "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
+        "onicon": "mi-notifications_active",
+        "oncolor": "#097479",
         "offvalue": "false",
         "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "animate": false,
+        "officon": "mi-notifications_off",
+        "offcolor": "grey",
+        "animate": true,
         "className": "",
         "x": 420,
         "y": 500,
@@ -816,13 +868,13 @@
         "style": "",
         "onvalue": "true",
         "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
+        "onicon": "mi-notifications_active",
+        "oncolor": "#097479",
         "offvalue": "false",
         "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "animate": false,
+        "officon": "mi-notifications_off",
+        "offcolor": "grey",
+        "animate": true,
         "className": "",
         "x": 420,
         "y": 600,
@@ -889,10 +941,15 @@
         "name": "mqtt_out",
         "links": [
             "1ed0e741f7a06f70",
-            "8ac89e6c867a24a5"
+            "8ac89e6c867a24a5",
+            "b51d2211d9864fa6",
+            "bd3426318da0c515",
+            "cf901411791e6376",
+            "ba49550494cbf9bd",
+            "1611a2a98624e994"
         ],
-        "x": 975,
-        "y": 120,
+        "x": 1595,
+        "y": 200,
         "wires": [
             [
                 "e289d1a3be4702f9"
@@ -938,8 +995,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 120,
-        "y": 1100,
+        "x": 100,
+        "y": 1380,
         "wires": [
             [
                 "e652ac6157f67280"
@@ -963,19 +1020,27 @@
                 "t": "eq",
                 "v": "190622R/humidity",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "190622R/light",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
-        "x": 290,
-        "y": 1100,
+        "outputs": 3,
+        "x": 270,
+        "y": 1380,
         "wires": [
             [
                 "73fe57b19578a7ef"
             ],
             [
                 "bc5b12d1d86ac51a"
+            ],
+            [
+                "b114ecfb62e7e121"
             ]
         ]
     },
@@ -1200,8 +1265,8 @@
         "links": [
             "b2b41000cb54d856"
         ],
-        "x": 450,
-        "y": 1060,
+        "x": 430,
+        "y": 1340,
         "wires": [],
         "l": true
     },
@@ -1228,7 +1293,7 @@
         "type": "function",
         "z": "9fc70cf43a34da9e",
         "name": "Process Temp",
-        "func": "let min_temp = flow.get(\"min_temp\");\nlet max_temp = parseInt(flow.get(\"max_temp\"));\nlet temp = parseInt(msg.payload)\n\nif (temp < min_temp) {\n    msg.payload = \"Current Temperature is lower than the Minimum Temperature\";\n    msg.topic = \"Temperature Warning\"\n    return msg;\n} else if (temp > max_temp) {\n    msg.payload = \"Current Temperature is higher than the Maximum Temperature\";\n    msg.topic = \"Temperature Warning\"\n    return msg;\n}\n\n",
+        "func": "let min_temp = parseInt(flow.get(\"min_temp\"));\nlet max_temp = parseInt(flow.get(\"max_temp\"));\nlet temp = parseInt(msg.payload)\n\nif (temp < min_temp) {\n    msg.payload = \"Current Temperature is lower than the Minimum Temperature\";\n    msg.topic = \"Temperature Warning\"\n    return msg;\n} else if (temp > max_temp) {\n    msg.payload = \"Current Temperature is higher than the Maximum Temperature\";\n    msg.topic = \"Temperature Warning\"\n    return msg;\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1319,7 +1384,7 @@
         "label": "",
         "format": "{{value | number:0}}%",
         "min": 0,
-        "max": "50",
+        "max": "100",
         "colors": [
             "#00b500",
             "#e6e600",
@@ -1540,7 +1605,7 @@
         "type": "function",
         "z": "9fc70cf43a34da9e",
         "name": "Process Temp",
-        "func": "let min_humidity = flow.get(\"min_humidity\");\nlet max_humidity = parseInt(flow.get(\"max_humidity\"));\nlet humidity = parseInt(msg.payload)\n\nif (humidity < min_humidity) {\n    msg.payload = \"Current Humidity is lower than the Minimum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n} else if (humidity > max_humidity) {\n    msg.payload = \"Current Humidity is higher than the Maximum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n}\n\n",
+        "func": "let min_humidity = parseInt(flow.get(\"min_humidity\"));\nlet max_humidity = parseInt(flow.get(\"max_humidity\"));\nlet humidity = parseInt(msg.payload)\n\nif (humidity < min_humidity) {\n    msg.payload = \"Current Humidity is lower than the Minimum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n} else if (humidity > max_humidity) {\n    msg.payload = \"Current Humidity is higher than the Maximum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1626,9 +1691,972 @@
         "links": [
             "f9a92778bc326a1b"
         ],
-        "x": 460,
-        "y": 1140,
+        "x": 440,
+        "y": 1380,
         "wires": [],
         "l": true
+    },
+    {
+        "id": "b114ecfb62e7e121",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "light",
+        "mode": "link",
+        "links": [
+            "28306226e17d46d1"
+        ],
+        "x": 430,
+        "y": 1420,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d4f486aff908b1a9",
+        "type": "ui_gauge",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "group": "eb957972e6b992d9",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Gauge",
+        "label": "",
+        "format": "{{value | number:2}}",
+        "min": 0,
+        "max": "1",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 970,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "a897411a4361a3ed",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Min",
+        "tooltip": "",
+        "group": "eb957972e6b992d9",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1",
+        "step": "0.01",
+        "className": "",
+        "x": 970,
+        "y": 1860,
+        "wires": [
+            [
+                "215949ec9228f3a6"
+            ]
+        ]
+    },
+    {
+        "id": "76be82c039998721",
+        "type": "ui_numeric",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Max",
+        "tooltip": "",
+        "group": "eb957972e6b992d9",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1",
+        "step": "0.01",
+        "className": "",
+        "x": 970,
+        "y": 1980,
+        "wires": [
+            [
+                "2dc01f35394185fe"
+            ]
+        ]
+    },
+    {
+        "id": "a31866777177b89c",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[]",
+        "payloadType": "json",
+        "x": 710,
+        "y": 1760,
+        "wires": [
+            [
+                "d4f486aff908b1a9",
+                "232da0f8fe6f744d"
+            ]
+        ]
+    },
+    {
+        "id": "5d2e63d74d261c66",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.2",
+        "payloadType": "num",
+        "x": 710,
+        "y": 1860,
+        "wires": [
+            [
+                "a897411a4361a3ed",
+                "215949ec9228f3a6"
+            ]
+        ]
+    },
+    {
+        "id": "93de8a79df9d3acd",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.8",
+        "payloadType": "num",
+        "x": 710,
+        "y": 1980,
+        "wires": [
+            [
+                "76be82c039998721",
+                "2dc01f35394185fe"
+            ]
+        ]
+    },
+    {
+        "id": "215949ec9228f3a6",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Min Light",
+        "rules": [
+            {
+                "t": "set",
+                "p": "min_light",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 990,
+        "y": 1920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2dc01f35394185fe",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Max Light",
+        "rules": [
+            {
+                "t": "set",
+                "p": "max_light",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 2040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28306226e17d46d1",
+        "type": "link in",
+        "z": "9fc70cf43a34da9e",
+        "name": "link in 3",
+        "links": [
+            "b114ecfb62e7e121"
+        ],
+        "x": 765,
+        "y": 1800,
+        "wires": [
+            [
+                "d4f486aff908b1a9",
+                "b7b229517a6f8c45",
+                "232da0f8fe6f744d"
+            ]
+        ]
+    },
+    {
+        "id": "b7b229517a6f8c45",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Process Temp",
+        "func": "let min_light = parseFloat(flow.get(\"min_light\"));\nlet max_light = parseFloat(flow.get(\"max_light\"));\nlet light = parseFloat(msg.payload)\n\nif (light < min_light) {\n    msg.payload = \"Current Light Intensity is lower than the Minimum Light Intensity\";\n    msg.topic = \"Light Intensity Warning\"\n    return msg;\n} else if (light > max_light) {\n    msg.payload = \"Current Light Intensity is higher than the Maximum Light Intensity\";\n    msg.topic = \"Light Intensity Warning\"\n    return msg;\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1720,
+        "wires": [
+            [
+                "e1e23aac2bc52a5e"
+            ]
+        ]
+    },
+    {
+        "id": "e1e23aac2bc52a5e",
+        "type": "ui_toast",
+        "z": "9fc70cf43a34da9e",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "Light Intensity Notification",
+        "x": 1230,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "232da0f8fe6f744d",
+        "type": "ui_chart",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "group": "eb957972e6b992d9",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "label": "Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "cubic",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 970,
+        "y": 1800,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2ae1a42f03909e1a",
+        "type": "ui_slider",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Minumum Angle",
+        "tooltip": "",
+        "group": "84b895dbf3a1702a",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "190622R/min_angle",
+        "topicType": "str",
+        "min": 0,
+        "max": "180",
+        "step": 1,
+        "className": "",
+        "x": 1240,
+        "y": 120,
+        "wires": [
+            [
+                "b51d2211d9864fa6"
+            ]
+        ]
+    },
+    {
+        "id": "b51d2211d9864fa6",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "min_angle_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 1385,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2fb37bf8dd5260b8",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "30",
+        "payloadType": "num",
+        "x": 1050,
+        "y": 120,
+        "wires": [
+            [
+                "2ae1a42f03909e1a"
+            ]
+        ]
+    },
+    {
+        "id": "2db65198db300077",
+        "type": "ui_slider",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Controlling Factor",
+        "tooltip": "",
+        "group": "84b895dbf3a1702a",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "190622R/contrling_factor",
+        "topicType": "str",
+        "min": 0,
+        "max": "1",
+        "step": "0.01",
+        "className": "",
+        "x": 1250,
+        "y": 220,
+        "wires": [
+            [
+                "bd3426318da0c515"
+            ]
+        ]
+    },
+    {
+        "id": "bd3426318da0c515",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "min_angle_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 1385,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ee0930ef3b66e47a",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0.75",
+        "payloadType": "num",
+        "x": 1050,
+        "y": 220,
+        "wires": [
+            [
+                "2db65198db300077"
+            ]
+        ]
+    },
+    {
+        "id": "172eb7793f2423a3",
+        "type": "ui_text_input",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Delay (s)",
+        "tooltip": "",
+        "group": "99ad34ad8a935e95",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "190622R/buzzer_delay",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 400,
+        "y": 2220,
+        "wires": [
+            [
+                "1611a2a98624e994"
+            ]
+        ]
+    },
+    {
+        "id": "24f1e41e24bf6fc8",
+        "type": "ui_text_input",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Frequency (Hz)",
+        "tooltip": "",
+        "group": "99ad34ad8a935e95",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "190622R/buzzer_freq",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 420,
+        "y": 2280,
+        "wires": [
+            [
+                "ba49550494cbf9bd"
+            ]
+        ]
+    },
+    {
+        "id": "3ac2a97e245d19b0",
+        "type": "ui_dropdown",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Buzzer Type",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "99ad34ad8a935e95",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Continuos",
+                "value": true,
+                "type": "bool"
+            },
+            {
+                "label": "Repeat On-Off",
+                "value": false,
+                "type": "bool"
+            }
+        ],
+        "payload": "",
+        "topic": "190622R/buzzer_type",
+        "topicType": "str",
+        "className": "",
+        "x": 410,
+        "y": 2340,
+        "wires": [
+            [
+                "cf901411791e6376"
+            ]
+        ]
+    },
+    {
+        "id": "8e2cb26ac0063340",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "10",
+        "payloadType": "num",
+        "x": 210,
+        "y": 2220,
+        "wires": [
+            [
+                "172eb7793f2423a3"
+            ]
+        ]
+    },
+    {
+        "id": "02ec33916fe4f073",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "250",
+        "payloadType": "num",
+        "x": 210,
+        "y": 2280,
+        "wires": [
+            [
+                "24f1e41e24bf6fc8"
+            ]
+        ]
+    },
+    {
+        "id": "0af54a8c97f7372a",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 210,
+        "y": 2340,
+        "wires": [
+            [
+                "3ac2a97e245d19b0"
+            ]
+        ]
+    },
+    {
+        "id": "1611a2a98624e994",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "buzzer_delay_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 585,
+        "y": 2220,
+        "wires": []
+    },
+    {
+        "id": "ba49550494cbf9bd",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "buzzer_freq_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 585,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "cf901411791e6376",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "buzzer_type_out",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 585,
+        "y": 2340,
+        "wires": []
+    },
+    {
+        "id": "191097676757f535",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Temperature",
+        "tooltip": "",
+        "group": "f7a9cd67e59156f4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 970,
+        "y": 2220,
+        "wires": [
+            [
+                "c6c8c015e3aee5eb"
+            ]
+        ]
+    },
+    {
+        "id": "04804074950a4e28",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Humidity",
+        "tooltip": "",
+        "group": "f7a9cd67e59156f4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 960,
+        "y": 2280,
+        "wires": [
+            [
+                "51c1344acc01916f"
+            ]
+        ]
+    },
+    {
+        "id": "477472509c06e55e",
+        "type": "ui_switch",
+        "z": "9fc70cf43a34da9e",
+        "name": "",
+        "label": "Light Intensity",
+        "tooltip": "",
+        "group": "f7a9cd67e59156f4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 980,
+        "y": 2340,
+        "wires": [
+            [
+                "d87793834eb0a7a4"
+            ]
+        ]
+    },
+    {
+        "id": "1c3316e272b64a9d",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 770,
+        "y": 2220,
+        "wires": [
+            [
+                "191097676757f535"
+            ]
+        ]
+    },
+    {
+        "id": "c6c8c015e3aee5eb",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Change Payload",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"group\":{\"show\":[\"Medibox_Temperature\"]}}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"group\":{\"hide\":[\"Medibox_Temperature\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 2220,
+        "wires": [
+            [
+                "619c4fd36e2f5f27"
+            ]
+        ]
+    },
+    {
+        "id": "752fb79be75ae6bb",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 770,
+        "y": 2280,
+        "wires": [
+            [
+                "04804074950a4e28"
+            ]
+        ]
+    },
+    {
+        "id": "b57003e3c0b88302",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Initial Trigger",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 770,
+        "y": 2340,
+        "wires": [
+            [
+                "477472509c06e55e"
+            ]
+        ]
+    },
+    {
+        "id": "51c1344acc01916f",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Change Payload",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"group\":{\"show\":[\"Medibox_Humidity\"]}}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"group\":{\"hide\":[\"Medibox_Humidity\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 2280,
+        "wires": [
+            [
+                "619c4fd36e2f5f27"
+            ]
+        ]
+    },
+    {
+        "id": "619c4fd36e2f5f27",
+        "type": "ui_ui_control",
+        "z": "9fc70cf43a34da9e",
+        "name": "Change Visibility",
+        "events": "all",
+        "x": 1440,
+        "y": 2280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d87793834eb0a7a4",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Change Payload",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "true",
+                "fromt": "bool",
+                "to": "{\"group\":{\"show\":[\"Medibox_Light_Intensity\"]}}",
+                "tot": "json"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "false",
+                "fromt": "bool",
+                "to": "{\"group\":{\"hide\":[\"Medibox_Light_Intensity\"]}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 2340,
+        "wires": [
+            [
+                "619c4fd36e2f5f27"
+            ]
+        ]
     }
 ]
