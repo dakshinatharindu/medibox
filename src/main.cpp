@@ -22,10 +22,9 @@
 
 // Alarm
 struct Alarm {
+    int isOn;
     int hour;
     int minute;
-    int second;
-    bool isOn;
 };
 
 // Global Constants
@@ -35,19 +34,18 @@ const char *mqqttBroker = "test.mosquitto.org";
 const int mqttPort = 1883;
 const char *mqttClientID = "ESP32-Medibox";
 const char *mainBuzzerTopic = "190622R/main_buzzer";
-const char *schedulerTopic = "190622R/scheduler";
+const char *alarmsTopic = "190622R/alarms";
 const char *minAngleTopic = "190622R/min_angle";
 const char *contrlingFactorTopic = "190622R/contrling_factor";
 const char *tempTopic = "190622R/temp";
 const char *humidityTopic = "190622R/humidity";
 const char *LDRTopic = "190622R/light";
-// const float gama = 0.7;
-// const float rl10 = 50;
 
 // Global variables
 unsigned long dhtTime;
 unsigned long ldrTime;
 bool mainSwitch = false;
+bool schedule = false;
 int minAngle = 30;
 float contrlingFactor = 0.75;
 float intensity;
@@ -61,10 +59,19 @@ Servo servo;
 RTC_DS1307 rtc;
 
 // Alarms
-Alarm alarm1;
-Alarm alarm2;
-Alarm alarm3;
+Alarm alarms[3];
 
+// Function declarations
+void lcdShowAlarm();
+
+//////////////////// ALARM ////////////////////
+int cmpfunc(const void *a, const void *b) {
+    Alarm *alarm1 = (Alarm *)a;
+    Alarm *alarm2 = (Alarm *)b;
+    int compare1 = alarm1->isOn * 2000 + alarm1->hour * 60 + alarm1->minute;
+    int compare2 = alarm2->isOn * 2000 + alarm2->hour * 60 + alarm2->minute;
+    return compare1 - compare2;
+}
 
 //////////////////// MQTT ////////////////////
 void mqttCallback(char *topic, byte *payload, unsigned int length) {
@@ -81,8 +88,23 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
             ledcWriteTone(BUZZER_CHANNEL, 1000);
         else
             ledcWrite(BUZZER_CHANNEL, 0);
-    } else if (strcmp(topic, schedulerTopic) == 0) {
-        // TODO: Implement scheduler
+    } else if (strcmp(topic, alarmsTopic) == 0) {
+        schedule = payloadStr.substring(0, 1).toInt();
+
+        alarms[0].hour = payloadStr.substring(2, 4).toInt();
+        alarms[0].minute = payloadStr.substring(4, 6).toInt();
+        alarms[0].isOn = payloadStr.substring(1, 2).toInt();
+
+        alarms[1].hour = payloadStr.substring(7, 9).toInt();
+        alarms[1].minute = payloadStr.substring(9, 11).toInt();
+        alarms[1].isOn = payloadStr.substring(6, 7).toInt();
+
+        alarms[2].hour = payloadStr.substring(12, 14).toInt();
+        alarms[2].minute = payloadStr.substring(14, 16).toInt();
+        alarms[2].isOn = payloadStr.substring(11, 12).toInt();
+
+        lcdShowAlarm();
+
     } else if (strcmp(topic, minAngleTopic) == 0) {
         minAngle = payloadStr.toInt();
     } else if (strcmp(topic, contrlingFactorTopic) == 0) {
@@ -112,7 +134,7 @@ void mqttLoop() {
         if (mqttClient.connect(mqttClientID)) {
             Serial.println("connected");
             mqttClient.subscribe(mainBuzzerTopic);
-            mqttClient.subscribe(schedulerTopic);
+            mqttClient.subscribe(alarmsTopic);
             mqttClient.subscribe(minAngleTopic);
             mqttClient.subscribe(contrlingFactorTopic);
         } else {
@@ -150,11 +172,6 @@ void ldrInit() {
 
 void ldrLoop() {
     int analogValue = analogRead(LDR_PIN);
-    // analogValue = map(analogValue, 4095, 0, 1024, 0);
-    // float voltage = analogValue / 1024. * 5;
-    // float resistance = 2000 * voltage / (1 - voltage / 5);
-    // float lux = pow(rl10 * 1e3 * pow(10, gama) / resistance, (1 / gama));
-
     intensity = 1 - analogValue / 4095.;
 
     if (millis() - ldrTime > LDR_PERIOD) {
@@ -173,49 +190,47 @@ void lcdInit() {
 
 void lcdShowTime() {
     DateTime now = rtc.now();
+    static uint8_t second = 0;
 
-    // print year, month, day
-    lcd.setCursor(0, 0);
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(now.year(), DEC);
-    lcd.print('-');
-    if (now.month() < 10) lcd.print('0');
-    lcd.print(now.month(), DEC);
-    lcd.print('-');
-    if (now.day() < 10) lcd.print('0');
-    lcd.print(now.day(), DEC);
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
+    if (second != now.second()) {
+        // print year, month, day
+        lcd.setCursor(0, 0);
+        lcd.print("     ");
+        lcd.print(now.year(), DEC);
+        lcd.print('-');
+        if (now.month() < 10) lcd.print('0');
+        lcd.print(now.month(), DEC);
+        lcd.print('-');
+        if (now.day() < 10) lcd.print('0');
+        lcd.print(now.day(), DEC);
+        lcd.print("     ");
 
-    // print hour, minute, second
-    lcd.setCursor(0, 1);
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    if (now.hour() < 10) lcd.print('0');
-    lcd.print(now.hour(), DEC);
-    lcd.print(':');
-    if (now.minute() < 10) lcd.print('0');
-    lcd.print(now.minute(), DEC);
-    lcd.print(':');
-    if (now.second() < 10) lcd.print('0');
-    lcd.print(now.second(), DEC);
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
-    lcd.print(' ');
+        // print hour, minute, second
+        lcd.setCursor(0, 1);
+        lcd.print("      ");
+        if (now.hour() < 10) lcd.print('0');
+        lcd.print(now.hour(), DEC);
+        lcd.print(':');
+        if (now.minute() < 10) lcd.print('0');
+        lcd.print(now.minute(), DEC);
+        lcd.print(':');
+        if (now.second() < 10) lcd.print('0');
+        lcd.print(now.second(), DEC);
+        lcd.print("      ");
+
+        second = now.second();
+    }
+}
+
+void lcdShowAlarm() {
+    lcd.setCursor(0, 2);
+    lcd.print("  UPCOMING SCHEDULE ");
+    lcd.setCursor(0, 3);
+    // sort out the coming alarm and display it
+    qsort(alarms, 3, sizeof(Alarm), cmpfunc);
+    Serial.print(alarms[0].hour);
+    Serial.print(":");
+    Serial.println(alarms[0].minute);
 }
 
 //////////////////// SERVO ////////////////////
