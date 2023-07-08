@@ -2,6 +2,7 @@
 #include <DHTesp.h>
 #include <LiquidCrystal_I2C.h>
 #include <PubSubClient.h>
+#include <RTClib.h>
 #include <Servo.h>
 #include <WiFi.h>
 
@@ -9,10 +10,23 @@
 #define DHT_PIN 13
 #define LDR_PIN 34
 #define SERVO_PIN 18
+#define BUZZER_PIN 15
+
+// Channels
+#define BUZZER_CHANNEL 2
+#define SERVO_CHANNEL 0
 
 // Periods
 #define DHT_PERIOD 5000
 #define LDR_PERIOD 5000
+
+// Alarm
+struct Alarm {
+    int hour;
+    int minute;
+    int second;
+    bool isOn;
+};
 
 // Global Constants
 const char *SSID = "Wokwi-GUEST";
@@ -44,8 +58,13 @@ WiFiClient espClient;
 PubSubClient mqttClient(espClient);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 Servo servo;
+RTC_DS1307 rtc;
 
-// ServoMotor servo = ServoMotor(SERVO_PIN);
+// Alarms
+Alarm alarm1;
+Alarm alarm2;
+Alarm alarm3;
+
 
 //////////////////// MQTT ////////////////////
 void mqttCallback(char *topic, byte *payload, unsigned int length) {
@@ -54,19 +73,20 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
     for (int i = 0; i < length; i++) {
         payloadCharArr[i] = (char)payload[i];
     }
-
+    String payloadStr = String(payloadCharArr).substring(0, length);
+    Serial.println(payloadStr);
     if (strcmp(topic, mainBuzzerTopic) == 0) {
-        if (payloadCharArr[0] == 't') {
-            mainSwitch = true;
-        } else if (payloadCharArr[0] == 'f') {
-            mainSwitch = false;
-        }
+        mainSwitch = payloadStr.toInt();
+        if (mainSwitch)
+            ledcWriteTone(BUZZER_CHANNEL, 1000);
+        else
+            ledcWrite(BUZZER_CHANNEL, 0);
     } else if (strcmp(topic, schedulerTopic) == 0) {
         // TODO: Implement scheduler
     } else if (strcmp(topic, minAngleTopic) == 0) {
-        minAngle = atoi(payloadCharArr);
+        minAngle = payloadStr.toInt();
     } else if (strcmp(topic, contrlingFactorTopic) == 0) {
-        contrlingFactor = atof(payloadCharArr);
+        contrlingFactor = payloadStr.toFloat();
     }
 }
 
@@ -151,14 +171,83 @@ void lcdInit() {
     lcd.print("Hello World!");
 }
 
+void lcdShowTime() {
+    DateTime now = rtc.now();
+
+    // print year, month, day
+    lcd.setCursor(0, 0);
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(now.year(), DEC);
+    lcd.print('-');
+    if (now.month() < 10) lcd.print('0');
+    lcd.print(now.month(), DEC);
+    lcd.print('-');
+    if (now.day() < 10) lcd.print('0');
+    lcd.print(now.day(), DEC);
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+
+    // print hour, minute, second
+    lcd.setCursor(0, 1);
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    if (now.hour() < 10) lcd.print('0');
+    lcd.print(now.hour(), DEC);
+    lcd.print(':');
+    if (now.minute() < 10) lcd.print('0');
+    lcd.print(now.minute(), DEC);
+    lcd.print(':');
+    if (now.second() < 10) lcd.print('0');
+    lcd.print(now.second(), DEC);
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+    lcd.print(' ');
+}
+
 //////////////////// SERVO ////////////////////
-void servoInit() { servo.attach(SERVO_PIN); }
+void servoInit() { servo.attach(SERVO_PIN, SERVO_CHANNEL); }
 
 void servoLoop() {
     int angle =
         (int)(minAngle + (180 - minAngle) * intensity * contrlingFactor);
     servo.write(angle);
     // TODO: smooth the servo movement
+}
+
+//////////////////// BUZZER ////////////////////
+void buzzerInit() {
+    ledcSetup(BUZZER_CHANNEL, 1000, 16);
+    ledcAttachPin(BUZZER_PIN, 2);
+}
+
+void buzzerLoop() {
+    if (mainSwitch)
+        ledcWriteTone(BUZZER_CHANNEL, 1000);
+    else
+        ledcWrite(BUZZER_CHANNEL, 0);
+}
+
+//////////////////// RTC ////////////////////
+void rtcInit() {
+    if (!rtc.begin()) {
+        Serial.println("Couldn't find RTC");
+        Serial.flush();
+        abort();
+    }
 }
 
 //////////////////// SETUP ////////////////////
@@ -168,11 +257,13 @@ void setup() {
     delay(10);
 
     // Init Objects
+    rtcInit();
+    lcdInit();
     dhtInit();
     ldrInit();
     mqttInit();
-    lcdInit();
     servoInit();
+    buzzerInit();
 }
 
 //////////////////// LOOP ////////////////////
@@ -181,4 +272,5 @@ void loop() {
     dhtLoop();
     ldrLoop();
     servoLoop();
+    lcdShowTime();
 }
