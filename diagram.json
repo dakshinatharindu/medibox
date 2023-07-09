@@ -1,51 +1,56 @@
 {
-    "version": 1,
-    "author": "Dakshina Tharindu",
-    "editor": "wokwi",
-    "parts": [
-      { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -12, "left": -211.34, "attrs": {} },
-      { "type": "wokwi-dht22", "id": "dht1", "top": -100.39, "left": -340.41, "attrs": {} },
-      {
-        "type": "wokwi-lcd2004",
-        "id": "lcd1",
-        "top": -20.88,
-        "left": 40.31,
-        "attrs": { "pins": "i2c" }
-      },
-      {
-        "type": "wokwi-buzzer",
-        "id": "bz1",
-        "top": 156.74,
-        "left": 8.77,
-        "attrs": { "volume": "0.1" }
-      },
-      {
-        "type": "wokwi-photoresistor-sensor",
-        "id": "ldr1",
-        "top": -182.46,
-        "left": -429.18,
-        "attrs": {}
-      },
-      { "type": "wokwi-servo", "id": "servo1", "top": -162.51, "left": -17.5, "attrs": {} }
-    ],
-    "connections": [
-      [ "esp:TX0", "$serialMonitor:RX", "", [] ],
-      [ "esp:RX0", "$serialMonitor:TX", "", [] ],
-      [ "lcd1:GND", "esp:GND.1", "black", [ "h-61.77", "v51.24" ] ],
-      [ "lcd1:VCC", "esp:3V3", "red", [ "h-54.98", "v51.24" ] ],
-      [ "lcd1:SDA", "esp:D21", "green", [ "h-90.43", "v22.86" ] ],
-      [ "lcd1:SCL", "esp:D22", "green", [ "h-96.16", "v-15.54" ] ],
-      [ "bz1:1", "esp:GND.1", "green", [ "v27.89", "h-120.2", "v-131.63" ] ],
-      [ "bz1:2", "esp:D15", "green", [ "v40.19", "h-137.35", "v-153.43" ] ],
-      [ "dht1:VCC", "esp:3V3", "red", [ "v199.82", "h228.71", "v-67.83" ] ],
-      [ "dht1:SDA", "esp:D13", "green", [ "v0" ] ],
-      [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
-      [ "ldr1:AO", "esp:D34", "green", [ "h32.05", "v178.06" ] ],
-      [ "ldr1:VCC", "esp:3V3", "red", [ "h160.54", "v312.96" ] ],
-      [ "ldr1:GND", "esp:GND.2", "black", [ "h21.04", "v293.46" ] ],
-      [ "servo1:PWM", "esp:D18", "green", [ "h-13.47", "v163.21" ] ],
-      [ "servo1:V+", "esp:VIN", "green", [ "h-199.58", "v249.51" ] ],
-      [ "servo1:GND", "esp:GND.1", "black", [ "h-67.5", "v249.51" ] ]
-    ],
-    "dependencies": {}
-  }
+  "version": 1,
+  "author": "Dakshina Tharindu",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -12, "left": -211.34, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": -100.39, "left": -340.41, "attrs": {} },
+    {
+      "type": "wokwi-lcd2004",
+      "id": "lcd1",
+      "top": -20.88,
+      "left": 40.31,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 156.74,
+      "left": 8.77,
+      "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": -182.46,
+      "left": -429.18,
+      "attrs": {}
+    },
+    { "type": "wokwi-servo", "id": "servo1", "top": -238.56, "left": -10.68, "attrs": {} },
+    { "type": "wokwi-ds1307", "id": "rtc1", "top": -123.97, "left": 45.08, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "lcd1:GND", "esp:GND.1", "black", [ "h-61.77", "v51.24" ] ],
+    [ "lcd1:VCC", "esp:3V3", "red", [ "h-54.98", "v51.24" ] ],
+    [ "lcd1:SDA", "esp:D21", "green", [ "h-90.43", "v22.86" ] ],
+    [ "lcd1:SCL", "esp:D22", "green", [ "h-96.16", "v-15.54" ] ],
+    [ "bz1:1", "esp:GND.1", "green", [ "v27.89", "h-120.2", "v-131.63" ] ],
+    [ "bz1:2", "esp:D15", "green", [ "v40.19", "h-137.35", "v-153.43" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v199.82", "h228.71", "v-67.83" ] ],
+    [ "dht1:SDA", "esp:D13", "green", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "ldr1:AO", "esp:D34", "green", [ "h32.05", "v178.06" ] ],
+    [ "ldr1:VCC", "esp:3V3", "red", [ "h160.54", "v312.96" ] ],
+    [ "ldr1:GND", "esp:GND.2", "black", [ "h21.04", "v293.46" ] ],
+    [ "servo1:V+", "esp:VIN", "green", [ "h-199.58", "v249.51" ] ],
+    [ "servo1:GND", "esp:GND.1", "black", [ "h-67.5", "v249.51" ] ],
+    [ "servo1:PWM", "esp:D18", "green", [ "h-45.11", "v163.21" ] ],
+    [ "rtc1:GND", "lcd1:GND", "black", [ "h-72.21", "v120.09" ] ],
+    [ "rtc1:5V", "servo1:V+", "red", [ "h0" ] ],
+    [ "rtc1:SDA", "lcd1:SDA", "green", [ "h-32.06", "v119.59" ] ],
+    [ "rtc1:SCL", "lcd1:SCL", "green", [ "h-24.53", "v119.59" ] ]
+  ],
+  "dependencies": {}
+}

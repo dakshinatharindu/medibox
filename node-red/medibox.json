@@ -370,8 +370,8 @@
         "max": "30",
         "step": 1,
         "className": "",
-        "x": 630,
-        "y": 280,
+        "x": 670,
+        "y": 360,
         "wires": [
             [
                 "07f0cd8c5a36f0a2"
@@ -395,8 +395,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 180,
-        "y": 280,
+        "x": 200,
+        "y": 360,
         "wires": [
             [
                 "453bdc4399fa7ff2"
@@ -422,8 +422,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
-        "y": 280,
+        "x": 820,
+        "y": 360,
         "wires": [
             []
         ]
@@ -439,11 +439,12 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"days\", 6)",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 280,
+        "x": 450,
+        "y": 360,
         "wires": [
             [
-                "541c2d3fa8c4f6ee"
+                "541c2d3fa8c4f6ee",
+                "cd785d391ad3f7f4"
             ]
         ]
     },
@@ -465,8 +466,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 410,
-        "y": 360,
+        "x": 630,
+        "y": 440,
         "wires": [
             [
                 "6a045f37d18b6178"
@@ -499,8 +500,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 420,
-        "y": 400,
+        "x": 640,
+        "y": 480,
         "wires": [
             [
                 "67a2fb872d75478b"
@@ -551,8 +552,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 360,
+        "x": 830,
+        "y": 440,
         "wires": [
             []
         ]
@@ -576,8 +577,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 400,
+        "x": 830,
+        "y": 480,
         "wires": [
             []
         ]
@@ -587,14 +588,14 @@
         "type": "function",
         "z": "9fc70cf43a34da9e",
         "name": "Process Alarms",
-        "func": "const offset = 19800000;\n\nlet schedule_en = flow.get(\"schedule\").toString();\n\n// Alarm 1\nlet alarm_1 = parseInt(flow.get(\"alarm_1_time\")) + offset;\nlet alarm_1_en = flow.get(\"alarm_1_en\").toString();\nlet alarm_1_hour = (Math.floor(alarm_1 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_1_min = (Math.floor(alarm_1 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 2\nlet alarm_2 = parseInt(flow.get(\"alarm_2_time\")) + offset;\nlet alarm_2_en = flow.get(\"alarm_2_en\").toString();\nlet alarm_2_hour = (Math.floor(alarm_2 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_2_min = (Math.floor(alarm_2 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 3\nlet alarm_3 = parseInt(flow.get(\"alarm_3_time\")) + offset;\nlet alarm_3_en = flow.get(\"alarm_3_en\").toString();\nlet alarm_3_hour = (Math.floor(alarm_3 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_3_min = (Math.floor(alarm_3 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\nmsg.payload = schedule_en + alarm_1_en + alarm_1_hour + alarm_1_min + alarm_2_en + alarm_2_hour + alarm_2_min + alarm_3_en + alarm_3_hour + alarm_3_min;\n\nreturn msg;\n\n",
+        "func": "const offset = 19800000;\n\nlet schedule_en = flow.get(\"schedule\").toString();\nlet days = flow.get(\"days\").toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 1\nlet alarm_1 = parseInt(flow.get(\"alarm_1_time\")) + offset;\nlet alarm_1_en = flow.get(\"alarm_1_en\").toString();\nlet alarm_1_hour = (Math.floor(alarm_1 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_1_min = (Math.floor(alarm_1 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 2\nlet alarm_2 = parseInt(flow.get(\"alarm_2_time\")) + offset;\nlet alarm_2_en = flow.get(\"alarm_2_en\").toString();\nlet alarm_2_hour = (Math.floor(alarm_2 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_2_min = (Math.floor(alarm_2 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 3\nlet alarm_3 = parseInt(flow.get(\"alarm_3_time\")) + offset;\nlet alarm_3_en = flow.get(\"alarm_3_en\").toString();\nlet alarm_3_hour = (Math.floor(alarm_3 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_3_min = (Math.floor(alarm_3 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\nmsg.payload = schedule_en + alarm_1_en + alarm_1_hour + alarm_1_min + alarm_2_en + alarm_2_hour + alarm_2_min + alarm_3_en + alarm_3_hour + alarm_3_min + days;\n\nreturn msg;\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"schedule\", false);\nflow.set(\"alarm_1_time\", 0);\nflow.set(\"alarm_1_en\", 0);",
         "finalize": "",
         "libs": [],
-        "x": 380,
-        "y": 700,
+        "x": 400,
+        "y": 780,
         "wires": [
             [
                 "1ed0e741f7a06f70"
@@ -617,8 +618,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "190622R/alarms",
-        "x": 170,
-        "y": 700,
+        "x": 190,
+        "y": 780,
         "wires": [
             [
                 "db0e512141d04ab9"
@@ -642,8 +643,8 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 150,
-        "y": 500,
+        "x": 370,
+        "y": 580,
         "wires": [
             [
                 "40e2022084843a44",
@@ -669,8 +670,8 @@
         "topic": "",
         "payload": "-19800000",
         "payloadType": "num",
-        "x": 150,
-        "y": 460,
+        "x": 370,
+        "y": 540,
         "wires": [
             [
                 "b62f4022cb5a36cd",
@@ -727,8 +728,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 410,
-        "y": 460,
+        "x": 630,
+        "y": 540,
         "wires": [
             [
                 "87473a252821ee4d"
@@ -761,8 +762,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 420,
-        "y": 500,
+        "x": 640,
+        "y": 580,
         "wires": [
             [
                 "2297b4269b3d0722"
@@ -788,8 +789,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 460,
+        "x": 830,
+        "y": 540,
         "wires": [
             []
         ]
@@ -813,8 +814,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 500,
+        "x": 830,
+        "y": 580,
         "wires": [
             []
         ]
@@ -837,8 +838,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 410,
-        "y": 560,
+        "x": 630,
+        "y": 640,
         "wires": [
             [
                 "7779c0a261738e0d"
@@ -871,8 +872,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 420,
-        "y": 600,
+        "x": 640,
+        "y": 680,
         "wires": [
             [
                 "1cc3080926f60b43"
@@ -898,8 +899,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 560,
+        "x": 830,
+        "y": 640,
         "wires": [
             []
         ]
@@ -923,8 +924,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 600,
+        "x": 830,
+        "y": 680,
         "wires": [
             []
         ]
@@ -941,7 +942,8 @@
             "bd3426318da0c515",
             "cf901411791e6376",
             "ba49550494cbf9bd",
-            "1611a2a98624e994"
+            "1611a2a98624e994",
+            "5210390220c9d95f"
         ],
         "x": 1595,
         "y": 200,
@@ -973,8 +975,8 @@
         "links": [
             "856df2095393af2b"
         ],
-        "x": 545,
-        "y": 700,
+        "x": 565,
+        "y": 780,
         "wires": []
     },
     {
@@ -2651,6 +2653,27 @@
         "wires": [
             [
                 "619c4fd36e2f5f27"
+            ]
+        ]
+    },
+    {
+        "id": "cd785d391ad3f7f4",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Sync Alarms",
+        "func": "if (msg.payload == 0) {\n    msg.payload == 0;\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 500,
+        "wires": [
+            [
+                "40e2022084843a44",
+                "4565835e8865e793",
+                "2568156f3c50e4be"
             ]
         ]
     }

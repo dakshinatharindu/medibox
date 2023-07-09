@@ -46,6 +46,7 @@ unsigned long dhtTime;
 unsigned long ldrTime;
 bool mainSwitch = false;
 bool schedule = false;
+int days = 0;
 int minAngle = 30;
 float contrlingFactor = 0.75;
 float intensity;
@@ -68,9 +69,11 @@ void lcdShowAlarm();
 int cmpfunc(const void *a, const void *b) {
     Alarm *alarm1 = (Alarm *)a;
     Alarm *alarm2 = (Alarm *)b;
-    int compare1 = alarm1->isOn * 2000 + alarm1->hour * 60 + alarm1->minute;
-    int compare2 = alarm2->isOn * 2000 + alarm2->hour * 60 + alarm2->minute;
-    return compare1 - compare2;
+    int compare1 =
+        alarm1->isOn * 2000 + (24 - alarm1->hour) * 60 + (60 - alarm1->minute);
+    int compare2 =
+        alarm2->isOn * 2000 + (24 - alarm2->hour) * 60 + (60 - alarm2->minute);
+    return compare2 - compare1;
 }
 
 //////////////////// MQTT ////////////////////
@@ -102,6 +105,8 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
         alarms[2].hour = payloadStr.substring(12, 14).toInt();
         alarms[2].minute = payloadStr.substring(14, 16).toInt();
         alarms[2].isOn = payloadStr.substring(11, 12).toInt();
+
+        days = payloadStr.substring(16, 18).toInt();
 
         lcdShowAlarm();
 
@@ -223,14 +228,59 @@ void lcdShowTime() {
 }
 
 void lcdShowAlarm() {
+    DateTime now = rtc.now();
     lcd.setCursor(0, 2);
     lcd.print("  UPCOMING SCHEDULE ");
     lcd.setCursor(0, 3);
     // sort out the coming alarm and display it
     qsort(alarms, 3, sizeof(Alarm), cmpfunc);
-    Serial.print(alarms[0].hour);
-    Serial.print(":");
+    Serial.println(alarms[0].hour);
     Serial.println(alarms[0].minute);
+    Serial.println(alarms[0].isOn);
+    if (schedule) {
+        if (alarms[0].isOn && alarms[0].hour > now.hour() ||
+            (alarms[0].hour == now.hour() && alarms[0].minute > now.minute())) {
+            lcd.print("        ");
+            if (alarms[0].hour < 10) lcd.print('0');
+            lcd.print(alarms[0].hour, DEC);
+            lcd.print(':');
+            if (alarms[0].minute < 10) lcd.print('0');
+            lcd.print(alarms[0].minute, DEC);
+            lcd.print("       ");
+        } else if (alarms[1].isOn && alarms[1].hour > now.hour() ||
+                   (alarms[1].hour == now.hour() &&
+                    alarms[1].minute > now.minute())) {
+            lcd.print("        ");
+            if (alarms[1].hour < 10) lcd.print('0');
+            lcd.print(alarms[1].hour, DEC);
+            lcd.print(':');
+            if (alarms[1].minute < 10) lcd.print('0');
+            lcd.print(alarms[1].minute, DEC);
+            lcd.print("       ");
+        } else if (alarms[2].isOn && alarms[2].hour > now.hour() ||
+                   (alarms[2].hour == now.hour() &&
+                    alarms[2].minute > now.minute())) {
+            lcd.print("        ");
+            if (alarms[2].hour < 10) lcd.print('0');
+            lcd.print(alarms[2].hour, DEC);
+            lcd.print(':');
+            if (alarms[2].minute < 10) lcd.print('0');
+            lcd.print(alarms[2].minute, DEC);
+            lcd.print("       ");
+        } else if (alarms[0].isOn && days > 0) {
+            lcd.print("        ");
+            if (alarms[0].hour < 10) lcd.print('0');
+            lcd.print(alarms[0].hour, DEC);
+            lcd.print(':');
+            if (alarms[0].minute < 10) lcd.print('0');
+            lcd.print(alarms[0].minute, DEC);
+            lcd.print("       ");
+        } else {
+            lcd.print("     NO SCHEDULE    ");
+        }
+    } else {
+        lcd.print("     NO SCHEDULE    ");
+    }
 }
 
 //////////////////// SERVO ////////////////////
