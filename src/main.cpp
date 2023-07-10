@@ -40,15 +40,22 @@ const char *contrlingFactorTopic = "190622R/contrling_factor";
 const char *tempTopic = "190622R/temp";
 const char *humidityTopic = "190622R/humidity";
 const char *LDRTopic = "190622R/light";
+const char *settingsTopic = "190622R/settings";
+const char *switchBackTopic = "190622R/switch_back";
 
 // Global variables
 unsigned long dhtTime;
 unsigned long ldrTime;
+unsigned long buzzerTime;
+bool buzzerState = false;
 bool mainSwitch = false;
 bool schedule = false;
 int days = 0;
 int minAngle = 30;
 float contrlingFactor = 0.75;
+int buzzerDelay = 1000;
+int buzzerFrequency = 256;
+int buzzerType = 0;
 float intensity;
 
 // Objects
@@ -64,6 +71,8 @@ Alarm alarms[3];
 
 // Function declarations
 void lcdShowAlarm();
+void buzzerRing();
+void buzzerStop();
 
 //////////////////// ALARM ////////////////////
 int cmpfunc(const void *a, const void *b) {
@@ -76,6 +85,22 @@ int cmpfunc(const void *a, const void *b) {
     return compare2 - compare1;
 }
 
+void checkAlarm() {
+    DateTime now = rtc.now();
+    static uint8_t lastMinute = 0;
+
+    if (now.minute() != lastMinute) {
+        lastMinute = now.minute();
+        for (int i = 0; i < 3; i++) {
+            if (alarms[i].isOn && alarms[i].hour == now.hour() &&
+                alarms[i].minute == now.minute()) {
+                mainSwitch = true;
+                mqttClient.publish(switchBackTopic, "1");
+            }
+        }
+    }
+}
+
 //////////////////// MQTT ////////////////////
 void mqttCallback(char *topic, byte *payload, unsigned int length) {
     char payloadCharArr[length];
@@ -84,13 +109,9 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
         payloadCharArr[i] = (char)payload[i];
     }
     String payloadStr = String(payloadCharArr).substring(0, length);
-    Serial.println(payloadStr);
     if (strcmp(topic, mainBuzzerTopic) == 0) {
         mainSwitch = payloadStr.toInt();
-        if (mainSwitch)
-            ledcWriteTone(BUZZER_CHANNEL, 1000);
-        else
-            ledcWrite(BUZZER_CHANNEL, 0);
+        if (mainSwitch == 0) lcdShowAlarm();
     } else if (strcmp(topic, alarmsTopic) == 0) {
         schedule = payloadStr.substring(0, 1).toInt();
 
@@ -107,13 +128,16 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
         alarms[2].isOn = payloadStr.substring(11, 12).toInt();
 
         days = payloadStr.substring(16, 18).toInt();
-
-        lcdShowAlarm();
+        if (mainSwitch == 0) lcdShowAlarm();
 
     } else if (strcmp(topic, minAngleTopic) == 0) {
         minAngle = payloadStr.toInt();
     } else if (strcmp(topic, contrlingFactorTopic) == 0) {
         contrlingFactor = payloadStr.toFloat();
+    } else if (strcmp(topic, settingsTopic) == 0) {
+        buzzerDelay = payloadStr.substring(0, 5).toInt();
+        buzzerFrequency = payloadStr.substring(5, 10).toInt();
+        buzzerType = payloadStr.substring(10, 11).toInt();
     }
 }
 
@@ -122,31 +146,49 @@ void mqttInit() {
     mqttClient.setCallback(mqttCallback);
     WiFi.begin(SSID, PASSWORD);
 
+    lcd.setCursor(0, 0);
+    lcd.print("Connecting ");
     while (WiFi.status() != WL_CONNECTED) {
-        Serial.print(".");
-        delay(1000);
+        lcd.print(".");
+        delay(500);
     }
-
-    Serial.print("Connected to ");
-    Serial.println(SSID);
-    Serial.print("IP Address: ");
-    Serial.println(WiFi.localIP());
+    lcd.setCursor(0, 1);
+    lcd.print("Connected to WiFI");
+    lcd.setCursor(0, 2);
+    lcd.print("SSID: ");
+    lcd.print(SSID);
+    lcd.setCursor(0, 3);
+    lcd.print("IP: ");
+    lcd.print(WiFi.localIP());
+    delay(1000);
+    lcd.clear();
 }
 
 void mqttLoop() {
     while (!mqttClient.connected()) {
-        Serial.print("Attempting MQTT connection...");
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Connecting to MQTT..");
         if (mqttClient.connect(mqttClientID)) {
-            Serial.println("connected");
+            lcd.setCursor(0, 1);
+            lcd.print("Connected to MQTT");
             mqttClient.subscribe(mainBuzzerTopic);
             mqttClient.subscribe(alarmsTopic);
             mqttClient.subscribe(minAngleTopic);
             mqttClient.subscribe(contrlingFactorTopic);
+            mqttClient.subscribe(settingsTopic);
+            delay(1000);
+            lcd.clear();
         } else {
-            Serial.print("failed, rc=");
-            Serial.print(mqttClient.state());
-            Serial.println(" try again in 5 seconds");
+            lcd.setCursor(0, 1);
+            lcd.print("failed, rc=");
+            lcd.print(mqttClient.state());
+            lcd.setCursor(0, 2);
+            lcd.println("TRY AGAIN IN");
+            lcd.setCursor(0, 3);
+            lcd.print("    5 SECONDS");
             delay(5000);
+            lcd.clear();
         }
     }
     mqttClient.loop();
@@ -190,7 +232,15 @@ void lcdInit() {
     lcd.init();
     lcd.backlight();
     lcd.setCursor(0, 0);
-    lcd.print("Hello World!");
+    lcd.print("********************");
+    lcd.setCursor(0, 1);
+    lcd.print("       MEDIBOX      ");
+    lcd.setCursor(0, 2);
+    lcd.print("YOUR PERSONAL DOCTOR");
+    lcd.setCursor(0, 3);
+    lcd.print("********************");
+    delay(1000);
+    lcd.clear();
 }
 
 void lcdShowTime() {
@@ -234,9 +284,6 @@ void lcdShowAlarm() {
     lcd.setCursor(0, 3);
     // sort out the coming alarm and display it
     qsort(alarms, 3, sizeof(Alarm), cmpfunc);
-    Serial.println(alarms[0].hour);
-    Serial.println(alarms[0].minute);
-    Serial.println(alarms[0].isOn);
     if (schedule) {
         if (alarms[0].isOn && alarms[0].hour > now.hour() ||
             (alarms[0].hour == now.hour() && alarms[0].minute > now.minute())) {
@@ -297,20 +344,49 @@ void servoLoop() {
 void buzzerInit() {
     ledcSetup(BUZZER_CHANNEL, 1000, 16);
     ledcAttachPin(BUZZER_PIN, 2);
+    buzzerTime = millis();
 }
 
 void buzzerLoop() {
-    if (mainSwitch)
-        ledcWriteTone(BUZZER_CHANNEL, 1000);
-    else
+    if (mainSwitch) {
+        if (buzzerType == 1) {
+            ledcWriteTone(BUZZER_CHANNEL, buzzerFrequency);
+            lcd.setCursor(0, 2);
+            lcd.print("  IT'S TIME TO TAKE ");
+            lcd.setCursor(0, 3);
+            lcd.print("     YOUR MEDICINE  ");
+        } else {
+            if (millis() - buzzerTime > buzzerDelay) {
+                buzzerTime = millis();
+                buzzerState = !buzzerState;
+                if (buzzerState) {
+                    ledcWriteTone(BUZZER_CHANNEL, buzzerFrequency);
+                    lcd.setCursor(0, 2);
+                    lcd.print("  IT'S TIME TO TAKE ");
+                    lcd.setCursor(0, 3);
+                    lcd.print("     YOUR MEDICINE  ");
+                } else {
+                    ledcWrite(BUZZER_CHANNEL, 0);
+                    lcd.setCursor(0, 2);
+                    lcd.print("                    ");
+                    lcd.setCursor(0, 3);
+                    lcd.print("                    ");
+                }
+            }
+        }
+    } else {
         ledcWrite(BUZZER_CHANNEL, 0);
+    }
 }
 
 //////////////////// RTC ////////////////////
 void rtcInit() {
     if (!rtc.begin()) {
-        Serial.println("Couldn't find RTC");
-        Serial.flush();
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Couldn't find RTC");
+        delay(1000);
+        lcd.clear();
         abort();
     }
 }
@@ -318,8 +394,8 @@ void rtcInit() {
 //////////////////// SETUP ////////////////////
 void setup() {
     // Init Serial
-    Serial.begin(115200);
-    delay(10);
+    // Serial.begin(115200);
+    // delay(10);
 
     // Init Objects
     rtcInit();
@@ -338,4 +414,6 @@ void loop() {
     ldrLoop();
     servoLoop();
     lcdShowTime();
+    checkAlarm();
+    buzzerLoop();
 }
