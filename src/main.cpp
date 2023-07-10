@@ -35,13 +35,13 @@ const int mqttPort = 1883;
 const char *mqttClientID = "ESP32-Medibox";
 const char *mainBuzzerTopic = "190622R/main_buzzer";
 const char *alarmsTopic = "190622R/alarms";
-const char *minAngleTopic = "190622R/min_angle";
-const char *contrlingFactorTopic = "190622R/contrling_factor";
+const char *servoTopic = "190622R/servo";
 const char *tempTopic = "190622R/temp";
 const char *humidityTopic = "190622R/humidity";
 const char *LDRTopic = "190622R/light";
 const char *settingsTopic = "190622R/settings";
 const char *switchBackTopic = "190622R/switch_back";
+const char *timeSyncTopic = "190622R/time_sync";
 
 // Global variables
 unsigned long dhtTime;
@@ -130,15 +130,21 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
         days = payloadStr.substring(16, 18).toInt();
         if (mainSwitch == 0) lcdShowAlarm();
 
-    } else if (strcmp(topic, minAngleTopic) == 0) {
-        minAngle = payloadStr.toInt();
-    } else if (strcmp(topic, contrlingFactorTopic) == 0) {
-        contrlingFactor = payloadStr.toFloat();
+    } else if (strcmp(topic, servoTopic) == 0) {
+        minAngle = payloadStr.substring(0, 3).toInt();
+        contrlingFactor = payloadStr.substring(3, 7).toFloat();
     } else if (strcmp(topic, settingsTopic) == 0) {
         buzzerDelay = payloadStr.substring(0, 5).toInt();
         buzzerFrequency = payloadStr.substring(5, 10).toInt();
         buzzerType = payloadStr.substring(10, 11).toInt();
-    }
+    } else if (strcmp(topic, timeSyncTopic) == 0) {
+        rtc.adjust(DateTime(payloadStr.substring(0, 4).toInt(),
+                            payloadStr.substring(4, 6).toInt(),
+                            payloadStr.substring(6, 8).toInt(),
+                            payloadStr.substring(8, 10).toInt(),
+                            payloadStr.substring(10, 12).toInt(),
+                            payloadStr.substring(12, 14).toInt()));
+        }
 }
 
 void mqttInit() {
@@ -174,9 +180,9 @@ void mqttLoop() {
             lcd.print("Connected to MQTT");
             mqttClient.subscribe(mainBuzzerTopic);
             mqttClient.subscribe(alarmsTopic);
-            mqttClient.subscribe(minAngleTopic);
-            mqttClient.subscribe(contrlingFactorTopic);
+            mqttClient.subscribe(servoTopic);
             mqttClient.subscribe(settingsTopic);
+            mqttClient.subscribe(timeSyncTopic);
             delay(1000);
             lcd.clear();
         } else {
@@ -394,8 +400,8 @@ void rtcInit() {
 //////////////////// SETUP ////////////////////
 void setup() {
     // Init Serial
-    // Serial.begin(115200);
-    // delay(10);
+    Serial.begin(115200);
+    delay(10);
 
     // Init Objects
     rtcInit();
