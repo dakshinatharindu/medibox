@@ -400,8 +400,8 @@ void rtcInit() {
 //////////////////// SETUP ////////////////////
 void setup() {
     // Init Serial
-    Serial.begin(115200);
-    delay(10);
+    // Serial.begin(115200);
+    // delay(10);
 
     // Init Objects
     rtcInit();

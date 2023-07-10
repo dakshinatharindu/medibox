@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "e7c0a1222bdaed1d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "0a88e55d99fec423",
         "type": "ui_tab",
         "name": "Medibox",
@@ -24,7 +32,7 @@
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false,
+                "edited": true,
                 "reset": false
             },
             "darkTheme": {
@@ -262,8 +270,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 370,
-        "y": 120,
+        "x": 1870,
+        "y": 160,
         "wires": [
             [
                 "fb3cab73d66b23a3"
@@ -290,8 +298,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 600,
-        "y": 120,
+        "x": 2100,
+        "y": 160,
         "wires": [
             [
                 "8ac89e6c867a24a5"
@@ -312,8 +320,8 @@
         "correl": "",
         "expiry": "",
         "broker": "6a062b302758abd6",
-        "x": 1730,
-        "y": 200,
+        "x": 2830,
+        "y": 900,
         "wires": []
     },
     {
@@ -342,8 +350,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 360,
-        "y": 200,
+        "x": 1860,
+        "y": 240,
         "wires": [
             [
                 "1116c0d9e5f7053e",
@@ -371,8 +379,8 @@
         "max": "30",
         "step": 1,
         "className": "",
-        "x": 610,
-        "y": 360,
+        "x": 2110,
+        "y": 400,
         "wires": [
             [
                 "07f0cd8c5a36f0a2"
@@ -396,8 +404,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 140,
-        "y": 360,
+        "x": 1640,
+        "y": 400,
         "wires": [
             [
                 "453bdc4399fa7ff2"
@@ -423,8 +431,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 780,
-        "y": 360,
+        "x": 2280,
+        "y": 400,
         "wires": [
             [
                 "db0e512141d04ab9",
@@ -443,8 +451,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"days\", 6)",
         "finalize": "",
         "libs": [],
-        "x": 390,
-        "y": 360,
+        "x": 1890,
+        "y": 400,
         "wires": [
             [
                 "541c2d3fa8c4f6ee",
@@ -470,8 +478,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 630,
-        "y": 440,
+        "x": 2130,
+        "y": 480,
         "wires": [
             [
                 "6a045f37d18b6178",
@@ -505,8 +513,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 640,
-        "y": 480,
+        "x": 2140,
+        "y": 520,
         "wires": [
             [
                 "67a2fb872d75478b",
@@ -533,8 +541,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 590,
-        "y": 200,
+        "x": 2090,
+        "y": 240,
         "wires": [
             []
         ]
@@ -558,8 +566,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 440,
+        "x": 2710,
+        "y": 480,
         "wires": [
             []
         ]
@@ -583,8 +591,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 480,
+        "x": 2710,
+        "y": 520,
         "wires": [
             []
         ]
@@ -600,8 +608,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"schedule\", false);\nflow.set(\"alarm_1_time\", 0);\nflow.set(\"alarm_1_en\", 0);",
         "finalize": "",
         "libs": [],
-        "x": 1140,
-        "y": 300,
+        "x": 2720,
+        "y": 340,
         "wires": [
             [
                 "1ed0e741f7a06f70"
@@ -612,15 +620,15 @@
         "id": "be35760e88cc36ac",
         "type": "inject",
         "z": "9fc70cf43a34da9e",
-        "name": "Sync Alarms ",
+        "name": "Sync Alarms Periodically ",
         "props": [],
         "repeat": "10",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 700,
-        "y": 300,
+        "x": 2350,
+        "y": 340,
         "wires": [
             [
                 "db0e512141d04ab9"
@@ -644,8 +652,8 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 370,
-        "y": 580,
+        "x": 1870,
+        "y": 620,
         "wires": [
             [
                 "40e2022084843a44",
@@ -671,8 +679,8 @@
         "topic": "",
         "payload": "-19800000",
         "payloadType": "num",
-        "x": 370,
-        "y": 540,
+        "x": 1870,
+        "y": 580,
         "wires": [
             [
                 "b62f4022cb5a36cd",
@@ -702,8 +710,8 @@
         "topic": "190622R/main_buzzer",
         "payload": "0",
         "payloadType": "num",
-        "x": 150,
-        "y": 160,
+        "x": 1650,
+        "y": 200,
         "wires": [
             [
                 "beca1c88f0500908",
@@ -729,8 +737,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 630,
-        "y": 540,
+        "x": 2130,
+        "y": 580,
         "wires": [
             [
                 "87473a252821ee4d",
@@ -764,8 +772,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 640,
-        "y": 580,
+        "x": 2140,
+        "y": 620,
         "wires": [
             [
                 "2297b4269b3d0722"
@@ -791,8 +799,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 540,
+        "x": 2710,
+        "y": 580,
         "wires": [
             []
         ]
@@ -816,8 +824,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 580,
+        "x": 2710,
+        "y": 620,
         "wires": [
             []
         ]
@@ -840,8 +848,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "msg",
-        "x": 630,
-        "y": 640,
+        "x": 2130,
+        "y": 680,
         "wires": [
             [
                 "7779c0a261738e0d",
@@ -875,8 +883,8 @@
         "offcolor": "grey",
         "animate": true,
         "className": "",
-        "x": 640,
-        "y": 680,
+        "x": 2140,
+        "y": 720,
         "wires": [
             [
                 "1cc3080926f60b43",
@@ -903,8 +911,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 640,
+        "x": 2710,
+        "y": 680,
         "wires": [
             []
         ]
@@ -928,8 +936,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 680,
+        "x": 2710,
+        "y": 720,
         "wires": [
             []
         ]
@@ -942,16 +950,12 @@
         "links": [
             "1ed0e741f7a06f70",
             "8ac89e6c867a24a5",
-            "b51d2211d9864fa6",
+            "a35e53b38d8530ea",
             "bd3426318da0c515",
-            "cf901411791e6376",
-            "ba49550494cbf9bd",
-            "1611a2a98624e994",
-            "5210390220c9d95f",
-            "a35e53b38d8530ea"
+            "927a478b7fa3c782"
         ],
-        "x": 1595,
-        "y": 200,
+        "x": 2695,
+        "y": 900,
         "wires": [
             [
                 "e289d1a3be4702f9"
@@ -967,8 +971,8 @@
         "links": [
             "856df2095393af2b"
         ],
-        "x": 715,
-        "y": 120,
+        "x": 2215,
+        "y": 160,
         "wires": []
     },
     {
@@ -980,8 +984,8 @@
         "links": [
             "856df2095393af2b"
         ],
-        "x": 1305,
-        "y": 300,
+        "x": 2845,
+        "y": 340,
         "wires": []
     },
     {
@@ -997,8 +1001,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 100,
-        "y": 1380,
+        "x": 140,
+        "y": 560,
         "wires": [
             [
                 "e652ac6157f67280"
@@ -1037,8 +1041,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 4,
-        "x": 270,
-        "y": 1380,
+        "x": 310,
+        "y": 560,
         "wires": [
             [
                 "73fe57b19578a7ef"
@@ -1067,7 +1071,7 @@
         "title": "Gauge",
         "label": "",
         "format": "{{value | number:0}}°C",
-        "min": 0,
+        "min": "-20",
         "max": "50",
         "colors": [
             "#00b500",
@@ -1078,8 +1082,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 970,
-        "y": 920,
+        "x": 1010,
+        "y": 100,
         "wires": []
     },
     {
@@ -1102,8 +1106,8 @@
         "max": "50",
         "step": 1,
         "className": "",
-        "x": 970,
-        "y": 1020,
+        "x": 1010,
+        "y": 200,
         "wires": [
             [
                 "f554f64dcb9e68f0"
@@ -1130,8 +1134,8 @@
         "max": "50",
         "step": 1,
         "className": "",
-        "x": 970,
-        "y": 1140,
+        "x": 1010,
+        "y": 320,
         "wires": [
             [
                 "dd29625aee3067a9"
@@ -1155,8 +1159,8 @@
         "topic": "",
         "payload": "[]",
         "payloadType": "json",
-        "x": 710,
-        "y": 920,
+        "x": 750,
+        "y": 100,
         "wires": [
             [
                 "b50b5060733d4233",
@@ -1181,8 +1185,8 @@
         "topic": "",
         "payload": "20",
         "payloadType": "num",
-        "x": 710,
-        "y": 1020,
+        "x": 750,
+        "y": 200,
         "wires": [
             [
                 "024815b118e084da",
@@ -1207,8 +1211,8 @@
         "topic": "",
         "payload": "30",
         "payloadType": "num",
-        "x": 710,
-        "y": 1140,
+        "x": 750,
+        "y": 320,
         "wires": [
             [
                 "0ac361ad6a8a8c59",
@@ -1235,8 +1239,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1000,
-        "y": 1080,
+        "x": 1040,
+        "y": 260,
         "wires": [
             []
         ]
@@ -1260,8 +1264,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1000,
-        "y": 1200,
+        "x": 1040,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1275,8 +1279,8 @@
         "links": [
             "b2b41000cb54d856"
         ],
-        "x": 430,
-        "y": 1340,
+        "x": 470,
+        "y": 520,
         "wires": [],
         "l": true
     },
@@ -1288,8 +1292,8 @@
         "links": [
             "73fe57b19578a7ef"
         ],
-        "x": 765,
-        "y": 960,
+        "x": 805,
+        "y": 140,
         "wires": [
             [
                 "b50b5060733d4233",
@@ -1309,8 +1313,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 880,
+        "x": 1040,
+        "y": 60,
         "wires": [
             [
                 "dcf154f097342287"
@@ -1332,8 +1336,8 @@
         "className": "",
         "topic": "",
         "name": "Temperature Notification",
-        "x": 1230,
-        "y": 880,
+        "x": 1270,
+        "y": 60,
         "wires": []
     },
     {
@@ -1349,10 +1353,10 @@
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
-        "interpolate": "cubic",
+        "interpolate": "linear",
         "nodata": "",
         "dot": false,
-        "ymin": "0",
+        "ymin": "-20",
         "ymax": "50",
         "removeOlder": 1,
         "removeOlderPoints": "",
@@ -1374,8 +1378,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 970,
-        "y": 960,
+        "x": 1010,
+        "y": 140,
         "wires": [
             []
         ]
@@ -1404,8 +1408,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 970,
-        "y": 1340,
+        "x": 1010,
+        "y": 520,
         "wires": []
     },
     {
@@ -1428,8 +1432,8 @@
         "max": "100",
         "step": 1,
         "className": "",
-        "x": 970,
-        "y": 1440,
+        "x": 1010,
+        "y": 620,
         "wires": [
             [
                 "d38d85ea203ccb05"
@@ -1456,8 +1460,8 @@
         "max": "100",
         "step": 1,
         "className": "",
-        "x": 970,
-        "y": 1560,
+        "x": 1010,
+        "y": 740,
         "wires": [
             [
                 "bbc78dcc58257bd7"
@@ -1481,8 +1485,8 @@
         "topic": "",
         "payload": "[]",
         "payloadType": "json",
-        "x": 710,
-        "y": 1340,
+        "x": 750,
+        "y": 520,
         "wires": [
             [
                 "9b1cdbdbbfe53971",
@@ -1507,8 +1511,8 @@
         "topic": "",
         "payload": "20",
         "payloadType": "num",
-        "x": 710,
-        "y": 1440,
+        "x": 750,
+        "y": 620,
         "wires": [
             [
                 "5d00755a1bcd1288",
@@ -1533,8 +1537,8 @@
         "topic": "",
         "payload": "50",
         "payloadType": "num",
-        "x": 710,
-        "y": 1560,
+        "x": 750,
+        "y": 740,
         "wires": [
             [
                 "1e6dc296405f246b",
@@ -1561,8 +1565,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1010,
-        "y": 1500,
+        "x": 1050,
+        "y": 680,
         "wires": [
             []
         ]
@@ -1586,8 +1590,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1010,
-        "y": 1620,
+        "x": 1050,
+        "y": 800,
         "wires": [
             []
         ]
@@ -1600,8 +1604,8 @@
         "links": [
             "bc5b12d1d86ac51a"
         ],
-        "x": 765,
-        "y": 1380,
+        "x": 805,
+        "y": 560,
         "wires": [
             [
                 "9b1cdbdbbfe53971",
@@ -1614,15 +1618,15 @@
         "id": "1fa5555c9fee0ccd",
         "type": "function",
         "z": "9fc70cf43a34da9e",
-        "name": "Process Temp",
+        "name": "Process Humidity",
         "func": "let min_humidity = parseInt(flow.get(\"min_humidity\"));\nlet max_humidity = parseInt(flow.get(\"max_humidity\"));\nlet humidity = parseInt(msg.payload)\n\nif (humidity < min_humidity) {\n    msg.payload = \"Current Humidity is lower than the Minimum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n} else if (humidity > max_humidity) {\n    msg.payload = \"Current Humidity is higher than the Maximum Humidity\";\n    msg.topic = \"Humidity Warning\"\n    return msg;\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 1300,
+        "x": 1050,
+        "y": 480,
         "wires": [
             [
                 "3fadb1c17ec634ff"
@@ -1644,8 +1648,8 @@
         "className": "",
         "topic": "",
         "name": "Humidity Notification",
-        "x": 1220,
-        "y": 1300,
+        "x": 1260,
+        "y": 480,
         "wires": []
     },
     {
@@ -1661,7 +1665,7 @@
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
-        "interpolate": "cubic",
+        "interpolate": "linear",
         "nodata": "",
         "dot": false,
         "ymin": "0",
@@ -1686,8 +1690,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 970,
-        "y": 1380,
+        "x": 1010,
+        "y": 560,
         "wires": [
             []
         ]
@@ -1701,8 +1705,8 @@
         "links": [
             "f9a92778bc326a1b"
         ],
-        "x": 440,
-        "y": 1380,
+        "x": 480,
+        "y": 560,
         "wires": [],
         "l": true
     },
@@ -1715,8 +1719,8 @@
         "links": [
             "28306226e17d46d1"
         ],
-        "x": 430,
-        "y": 1420,
+        "x": 470,
+        "y": 600,
         "wires": [],
         "l": true
     },
@@ -1744,8 +1748,8 @@
         "seg2": "",
         "diff": false,
         "className": "",
-        "x": 970,
-        "y": 1760,
+        "x": 1010,
+        "y": 940,
         "wires": []
     },
     {
@@ -1768,8 +1772,8 @@
         "max": "1",
         "step": "0.01",
         "className": "",
-        "x": 970,
-        "y": 1860,
+        "x": 1010,
+        "y": 1040,
         "wires": [
             [
                 "215949ec9228f3a6"
@@ -1796,8 +1800,8 @@
         "max": "1",
         "step": "0.01",
         "className": "",
-        "x": 970,
-        "y": 1980,
+        "x": 1010,
+        "y": 1160,
         "wires": [
             [
                 "2dc01f35394185fe"
@@ -1821,8 +1825,8 @@
         "topic": "",
         "payload": "[]",
         "payloadType": "json",
-        "x": 710,
-        "y": 1760,
+        "x": 750,
+        "y": 940,
         "wires": [
             [
                 "d4f486aff908b1a9",
@@ -1847,8 +1851,8 @@
         "topic": "",
         "payload": "0.2",
         "payloadType": "num",
-        "x": 710,
-        "y": 1860,
+        "x": 750,
+        "y": 1040,
         "wires": [
             [
                 "a897411a4361a3ed",
@@ -1873,8 +1877,8 @@
         "topic": "",
         "payload": "0.8",
         "payloadType": "num",
-        "x": 710,
-        "y": 1980,
+        "x": 750,
+        "y": 1160,
         "wires": [
             [
                 "76be82c039998721",
@@ -1901,8 +1905,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 990,
-        "y": 1920,
+        "x": 1030,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -1926,8 +1930,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1000,
-        "y": 2040,
+        "x": 1040,
+        "y": 1220,
         "wires": [
             []
         ]
@@ -1940,8 +1944,8 @@
         "links": [
             "b114ecfb62e7e121"
         ],
-        "x": 765,
-        "y": 1800,
+        "x": 805,
+        "y": 980,
         "wires": [
             [
                 "d4f486aff908b1a9",
@@ -1954,15 +1958,15 @@
         "id": "b7b229517a6f8c45",
         "type": "function",
         "z": "9fc70cf43a34da9e",
-        "name": "Process Temp",
+        "name": "Process Light",
         "func": "let min_light = parseFloat(flow.get(\"min_light\"));\nlet max_light = parseFloat(flow.get(\"max_light\"));\nlet light = parseFloat(msg.payload)\n\nif (light < min_light) {\n    msg.payload = \"Current Light Intensity is lower than the Minimum Light Intensity\";\n    msg.topic = \"Light Intensity Warning\"\n    return msg;\n} else if (light > max_light) {\n    msg.payload = \"Current Light Intensity is higher than the Maximum Light Intensity\";\n    msg.topic = \"Light Intensity Warning\"\n    return msg;\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1000,
-        "y": 1720,
+        "x": 1040,
+        "y": 900,
         "wires": [
             [
                 "e1e23aac2bc52a5e"
@@ -1984,8 +1988,8 @@
         "className": "",
         "topic": "",
         "name": "Light Intensity Notification",
-        "x": 1230,
-        "y": 1720,
+        "x": 1270,
+        "y": 900,
         "wires": []
     },
     {
@@ -2001,7 +2005,7 @@
         "chartType": "line",
         "legend": "false",
         "xformat": "HH:mm:ss",
-        "interpolate": "cubic",
+        "interpolate": "linear",
         "nodata": "",
         "dot": false,
         "ymin": "0",
@@ -2026,8 +2030,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 970,
-        "y": 1800,
+        "x": 1010,
+        "y": 980,
         "wires": [
             []
         ]
@@ -2051,26 +2055,14 @@
         "max": "180",
         "step": 1,
         "className": "",
-        "x": 1240,
-        "y": 120,
+        "x": 2620,
+        "y": 40,
         "wires": [
             [
-                "b51d2211d9864fa6"
+                "166414533bc9710c",
+                "8e9150027505e72d"
             ]
         ]
-    },
-    {
-        "id": "b51d2211d9864fa6",
-        "type": "link out",
-        "z": "9fc70cf43a34da9e",
-        "name": "min_angle_out",
-        "mode": "link",
-        "links": [
-            "856df2095393af2b"
-        ],
-        "x": 1385,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "2fb37bf8dd5260b8",
@@ -2089,8 +2081,8 @@
         "topic": "",
         "payload": "30",
         "payloadType": "num",
-        "x": 1050,
-        "y": 120,
+        "x": 2430,
+        "y": 40,
         "wires": [
             [
                 "2ae1a42f03909e1a"
@@ -2116,11 +2108,12 @@
         "max": "1",
         "step": "0.01",
         "className": "",
-        "x": 1250,
-        "y": 220,
+        "x": 2630,
+        "y": 140,
         "wires": [
             [
-                "bd3426318da0c515"
+                "d94babdbc9b0c1f1",
+                "8e9150027505e72d"
             ]
         ]
     },
@@ -2128,12 +2121,12 @@
         "id": "bd3426318da0c515",
         "type": "link out",
         "z": "9fc70cf43a34da9e",
-        "name": "min_angle_out",
+        "name": "servo",
         "mode": "link",
         "links": [
             "856df2095393af2b"
         ],
-        "x": 1385,
+        "x": 3095,
         "y": 220,
         "wires": []
     },
@@ -2154,8 +2147,8 @@
         "topic": "",
         "payload": "0.75",
         "payloadType": "num",
-        "x": 1050,
-        "y": 220,
+        "x": 2430,
+        "y": 140,
         "wires": [
             [
                 "2db65198db300077"
@@ -2180,8 +2173,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "str",
-        "x": 410,
-        "y": 2220,
+        "x": 2010,
+        "y": 900,
         "wires": [
             [
                 "2ddb39d2465a647c",
@@ -2207,8 +2200,8 @@
         "sendOnBlur": true,
         "className": "",
         "topicType": "str",
-        "x": 420,
-        "y": 2280,
+        "x": 2020,
+        "y": 960,
         "wires": [
             [
                 "849c92f76f93835e",
@@ -2246,8 +2239,8 @@
         "topic": "",
         "topicType": "str",
         "className": "",
-        "x": 410,
-        "y": 2340,
+        "x": 2010,
+        "y": 1020,
         "wires": [
             [
                 "44669ba5819ed926",
@@ -2272,8 +2265,8 @@
         "topic": "",
         "payload": "1000",
         "payloadType": "num",
-        "x": 210,
-        "y": 2220,
+        "x": 1810,
+        "y": 900,
         "wires": [
             [
                 "172eb7793f2423a3"
@@ -2295,10 +2288,10 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "250",
+        "payload": "1000",
         "payloadType": "num",
-        "x": 210,
-        "y": 2280,
+        "x": 1810,
+        "y": 960,
         "wires": [
             [
                 "24f1e41e24bf6fc8"
@@ -2322,8 +2315,8 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 210,
-        "y": 2340,
+        "x": 1810,
+        "y": 1020,
         "wires": [
             [
                 "3ac2a97e245d19b0"
@@ -2356,8 +2349,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 410,
-        "y": 2600,
+        "x": 2010,
+        "y": 1280,
         "wires": [
             [
                 "c6c8c015e3aee5eb"
@@ -2390,8 +2383,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 400,
-        "y": 2660,
+        "x": 2000,
+        "y": 1340,
         "wires": [
             [
                 "51c1344acc01916f"
@@ -2424,8 +2417,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 420,
-        "y": 2720,
+        "x": 2020,
+        "y": 1400,
         "wires": [
             [
                 "d87793834eb0a7a4"
@@ -2449,8 +2442,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 210,
-        "y": 2600,
+        "x": 1810,
+        "y": 1280,
         "wires": [
             [
                 "191097676757f535"
@@ -2487,8 +2480,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 630,
-        "y": 2600,
+        "x": 2230,
+        "y": 1280,
         "wires": [
             [
                 "619c4fd36e2f5f27"
@@ -2512,8 +2505,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 210,
-        "y": 2660,
+        "x": 1810,
+        "y": 1340,
         "wires": [
             [
                 "04804074950a4e28"
@@ -2537,8 +2530,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 210,
-        "y": 2720,
+        "x": 1810,
+        "y": 1400,
         "wires": [
             [
                 "477472509c06e55e"
@@ -2575,8 +2568,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 630,
-        "y": 2660,
+        "x": 2230,
+        "y": 1340,
         "wires": [
             [
                 "619c4fd36e2f5f27"
@@ -2589,8 +2582,8 @@
         "z": "9fc70cf43a34da9e",
         "name": "Change Visibility",
         "events": "all",
-        "x": 880,
-        "y": 2660,
+        "x": 2480,
+        "y": 1340,
         "wires": [
             []
         ]
@@ -2625,8 +2618,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 630,
-        "y": 2720,
+        "x": 2230,
+        "y": 1400,
         "wires": [
             [
                 "619c4fd36e2f5f27"
@@ -2644,8 +2637,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 500,
+        "x": 1870,
+        "y": 540,
         "wires": [
             [
                 "40e2022084843a44",
@@ -2673,8 +2666,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 620,
-        "y": 2220,
+        "x": 2220,
+        "y": 900,
         "wires": [
             []
         ]
@@ -2698,8 +2691,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 640,
-        "y": 2280,
+        "x": 2240,
+        "y": 960,
         "wires": [
             []
         ]
@@ -2723,8 +2716,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 620,
-        "y": 2340,
+        "x": 2220,
+        "y": 1020,
         "wires": [
             []
         ]
@@ -2740,8 +2733,8 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 380,
-        "y": 2420,
+        "x": 1980,
+        "y": 1100,
         "wires": [
             [
                 "20c0d53e90a82e6f"
@@ -2752,15 +2745,15 @@
         "id": "20c0d53e90a82e6f",
         "type": "function",
         "z": "9fc70cf43a34da9e",
-        "name": "Process Settings",
-        "func": "let delay = flow.get(\"delay\").toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });;\nlet freq = flow.get(\"freq\").toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });;\nlet type = flow.get(\"type\").toString();\n\nmsg.payload = delay + freq + type;\nmsg.topic = \"190622R/settings\";\n\nreturn msg;\n\n",
+        "name": "Sync Settings Periodically",
+        "func": "let delay = flow.get(\"delay\").toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });\nlet freq = flow.get(\"freq\").toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });\nlet type = flow.get(\"type\").toString();\nmsg.payload = delay + freq + type;\nmsg.topic = \"190622R/settings\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"delay\", 10);\nflow.set(\"freq\", 250);\nflow.set(\"type\", 0);",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"delay\", 1000);\nflow.set(\"freq\", 1000);\nflow.set(\"type\", 0);",
         "finalize": "",
         "libs": [],
-        "x": 670,
-        "y": 2420,
+        "x": 2290,
+        "y": 1100,
         "wires": [
             [
                 "a35e53b38d8530ea"
@@ -2776,8 +2769,8 @@
         "links": [
             "856df2095393af2b"
         ],
-        "x": 865,
-        "y": 2420,
+        "x": 2465,
+        "y": 1100,
         "wires": []
     },
     {
@@ -2789,8 +2782,8 @@
         "links": [
             "23d6ca8b9712da67"
         ],
-        "x": 450,
-        "y": 1460,
+        "x": 490,
+        "y": 640,
         "wires": [],
         "l": true
     },
@@ -2802,12 +2795,151 @@
         "links": [
             "e60ca9f42b47fce6"
         ],
-        "x": 185,
-        "y": 80,
+        "x": 1685,
+        "y": 120,
         "wires": [
             [
                 "beca1c88f0500908"
             ]
         ]
+    },
+    {
+        "id": "244ab5200e415e42",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Sync Servo Periodically",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 2530,
+        "y": 220,
+        "wires": [
+            [
+                "8e9150027505e72d"
+            ]
+        ]
+    },
+    {
+        "id": "166414533bc9710c",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Minimum Angle",
+        "rules": [
+            {
+                "t": "set",
+                "p": "min_angle",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2850,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d94babdbc9b0c1f1",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Controlling Factor",
+        "rules": [
+            {
+                "t": "set",
+                "p": "con_fact",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2860,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e9150027505e72d",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Sync Servo Parameters",
+        "func": "let min_angle = flow.get(\"min_angle\").toLocaleString('en-US', { minimumIntegerDigits: 3, useGrouping: false });\nlet con_fact = flow.get(\"con_fact\").toFixed(2).toLocaleString('en-US', { minimumIntegerDigits: 1, useGrouping: false });\n\nmsg.payload = min_angle + con_fact;\nmsg.topic = \"190622R/servo\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"min_angle\", 30);\nflow.set(\"con_fact\", 0.75);",
+        "finalize": "",
+        "libs": [],
+        "x": 2890,
+        "y": 220,
+        "wires": [
+            [
+                "bd3426318da0c515"
+            ]
+        ]
+    },
+    {
+        "id": "a37b2760ca3777ad",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Sync Time Periodically",
+        "props": [],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1970,
+        "y": 1520,
+        "wires": [
+            [
+                "c01fdbfc07b97b8f"
+            ]
+        ]
+    },
+    {
+        "id": "c01fdbfc07b97b8f",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Process Time",
+        "func": "let time = new Date()\n\nlet year = time.getFullYear().toLocaleString('en-US', { minimumIntegerDigits: 4, useGrouping: false });\nlet month = (time.getMonth() + 1).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet day = time.getDate().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet hour = time.getHours().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet minute = time.getMinutes().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet second = time.getSeconds().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\nmsg.payload = year + month + day + hour + minute + second;\nmsg.topic = \"190622R/time_sync\";\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2260,
+        "y": 1520,
+        "wires": [
+            [
+                "927a478b7fa3c782"
+            ]
+        ]
+    },
+    {
+        "id": "927a478b7fa3c782",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 2445,
+        "y": 1520,
+        "wires": []
     }
 ]
