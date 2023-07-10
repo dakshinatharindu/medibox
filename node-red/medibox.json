@@ -8,14 +8,6 @@
         "env": []
     },
     {
-        "id": "e7c0a1222bdaed1d",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "0a88e55d99fec423",
         "type": "ui_tab",
         "name": "Medibox",
