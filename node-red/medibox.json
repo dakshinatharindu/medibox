@@ -346,7 +346,8 @@
         "y": 200,
         "wires": [
             [
-                "1116c0d9e5f7053e"
+                "1116c0d9e5f7053e",
+                "db0e512141d04ab9"
             ]
         ]
     },
@@ -370,7 +371,7 @@
         "max": "30",
         "step": 1,
         "className": "",
-        "x": 670,
+        "x": 610,
         "y": 360,
         "wires": [
             [
@@ -395,7 +396,7 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 200,
+        "x": 140,
         "y": 360,
         "wires": [
             [
@@ -422,10 +423,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 820,
+        "x": 780,
         "y": 360,
         "wires": [
-            []
+            [
+                "db0e512141d04ab9",
+                "cd785d391ad3f7f4"
+            ]
         ]
     },
     {
@@ -439,7 +443,7 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"days\", 6)",
         "finalize": "",
         "libs": [],
-        "x": 450,
+        "x": 390,
         "y": 360,
         "wires": [
             [
@@ -470,7 +474,8 @@
         "y": 440,
         "wires": [
             [
-                "6a045f37d18b6178"
+                "6a045f37d18b6178",
+                "db0e512141d04ab9"
             ]
         ]
     },
@@ -504,7 +509,8 @@
         "y": 480,
         "wires": [
             [
-                "67a2fb872d75478b"
+                "67a2fb872d75478b",
+                "db0e512141d04ab9"
             ]
         ]
     },
@@ -552,7 +558,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 1210,
         "y": 440,
         "wires": [
             []
@@ -577,7 +583,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 1210,
         "y": 480,
         "wires": [
             []
@@ -588,14 +594,14 @@
         "type": "function",
         "z": "9fc70cf43a34da9e",
         "name": "Process Alarms",
-        "func": "const offset = 19800000;\n\nlet schedule_en = flow.get(\"schedule\").toString();\nlet days = flow.get(\"days\").toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 1\nlet alarm_1 = parseInt(flow.get(\"alarm_1_time\")) + offset;\nlet alarm_1_en = flow.get(\"alarm_1_en\").toString();\nlet alarm_1_hour = (Math.floor(alarm_1 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_1_min = (Math.floor(alarm_1 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 2\nlet alarm_2 = parseInt(flow.get(\"alarm_2_time\")) + offset;\nlet alarm_2_en = flow.get(\"alarm_2_en\").toString();\nlet alarm_2_hour = (Math.floor(alarm_2 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_2_min = (Math.floor(alarm_2 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 3\nlet alarm_3 = parseInt(flow.get(\"alarm_3_time\")) + offset;\nlet alarm_3_en = flow.get(\"alarm_3_en\").toString();\nlet alarm_3_hour = (Math.floor(alarm_3 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_3_min = (Math.floor(alarm_3 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\nmsg.payload = schedule_en + alarm_1_en + alarm_1_hour + alarm_1_min + alarm_2_en + alarm_2_hour + alarm_2_min + alarm_3_en + alarm_3_hour + alarm_3_min + days;\n\nreturn msg;\n\n",
+        "func": "const offset = 19800000;\n\nlet schedule_en = flow.get(\"schedule\").toString();\nlet days = flow.get(\"days\").toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 1\nlet alarm_1 = parseInt(flow.get(\"alarm_1_time\")) + offset;\nlet alarm_1_en = flow.get(\"alarm_1_en\").toString();\nlet alarm_1_hour = (Math.floor(alarm_1 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_1_min = (Math.floor(alarm_1 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 2\nlet alarm_2 = parseInt(flow.get(\"alarm_2_time\")) + offset;\nlet alarm_2_en = flow.get(\"alarm_2_en\").toString();\nlet alarm_2_hour = (Math.floor(alarm_2 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_2_min = (Math.floor(alarm_2 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\n// Alarm 3\nlet alarm_3 = parseInt(flow.get(\"alarm_3_time\")) + offset;\nlet alarm_3_en = flow.get(\"alarm_3_en\").toString();\nlet alarm_3_hour = (Math.floor(alarm_3 / 3600000)).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\nlet alarm_3_min = (Math.floor(alarm_3 / 60000) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false });\n\nmsg.payload = schedule_en + alarm_1_en + alarm_1_hour + alarm_1_min + alarm_2_en + alarm_2_hour + alarm_2_min + alarm_3_en + alarm_3_hour + alarm_3_min + days;\nmsg.topic = \"190622R/alarms\";\n\nreturn msg;\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"schedule\", false);\nflow.set(\"alarm_1_time\", 0);\nflow.set(\"alarm_1_en\", 0);",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 780,
+        "x": 1140,
+        "y": 300,
         "wires": [
             [
                 "1ed0e741f7a06f70"
@@ -606,20 +612,15 @@
         "id": "be35760e88cc36ac",
         "type": "inject",
         "z": "9fc70cf43a34da9e",
-        "name": "",
-        "props": [
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
+        "name": "Sync Alarms ",
+        "props": [],
         "repeat": "10",
         "crontab": "",
-        "once": false,
+        "once": true,
         "onceDelay": 0.1,
-        "topic": "190622R/alarms",
-        "x": 190,
-        "y": 780,
+        "topic": "",
+        "x": 700,
+        "y": 300,
         "wires": [
             [
                 "db0e512141d04ab9"
@@ -732,7 +733,8 @@
         "y": 540,
         "wires": [
             [
-                "87473a252821ee4d"
+                "87473a252821ee4d",
+                "db0e512141d04ab9"
             ]
         ]
     },
@@ -789,7 +791,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 1210,
         "y": 540,
         "wires": [
             []
@@ -814,7 +816,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 1210,
         "y": 580,
         "wires": [
             []
@@ -842,7 +844,8 @@
         "y": 640,
         "wires": [
             [
-                "7779c0a261738e0d"
+                "7779c0a261738e0d",
+                "db0e512141d04ab9"
             ]
         ]
     },
@@ -876,7 +879,8 @@
         "y": 680,
         "wires": [
             [
-                "1cc3080926f60b43"
+                "1cc3080926f60b43",
+                "db0e512141d04ab9"
             ]
         ]
     },
@@ -899,7 +903,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 1210,
         "y": 640,
         "wires": [
             []
@@ -924,7 +928,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 830,
+        "x": 1210,
         "y": 680,
         "wires": [
             []
@@ -943,7 +947,8 @@
             "cf901411791e6376",
             "ba49550494cbf9bd",
             "1611a2a98624e994",
-            "5210390220c9d95f"
+            "5210390220c9d95f",
+            "a35e53b38d8530ea"
         ],
         "x": 1595,
         "y": 200,
@@ -975,8 +980,8 @@
         "links": [
             "856df2095393af2b"
         ],
-        "x": 565,
-        "y": 780,
+        "x": 1305,
+        "y": 300,
         "wires": []
     },
     {
@@ -1022,11 +1027,16 @@
                 "t": "eq",
                 "v": "190622R/light",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "190622R/switch_back",
+                "vt": "str"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 3,
+        "outputs": 4,
         "x": 270,
         "y": 1380,
         "wires": [
@@ -1038,6 +1048,9 @@
             ],
             [
                 "b114ecfb62e7e121"
+            ],
+            [
+                "e60ca9f42b47fce6"
             ]
         ]
     },
@@ -2154,24 +2167,25 @@
         "type": "ui_text_input",
         "z": "9fc70cf43a34da9e",
         "name": "",
-        "label": "Delay (s)",
+        "label": "Delay (ms)",
         "tooltip": "",
         "group": "99ad34ad8a935e95",
         "order": 1,
         "width": 0,
         "height": 0,
         "passthru": true,
-        "mode": "text",
+        "mode": "number",
         "delay": 300,
-        "topic": "190622R/buzzer_delay",
+        "topic": "",
         "sendOnBlur": true,
         "className": "",
         "topicType": "str",
-        "x": 400,
+        "x": 410,
         "y": 2220,
         "wires": [
             [
-                "1611a2a98624e994"
+                "2ddb39d2465a647c",
+                "20c0d53e90a82e6f"
             ]
         ]
     },
@@ -2187,9 +2201,9 @@
         "width": 0,
         "height": 0,
         "passthru": true,
-        "mode": "text",
+        "mode": "number",
         "delay": 300,
-        "topic": "190622R/buzzer_freq",
+        "topic": "",
         "sendOnBlur": true,
         "className": "",
         "topicType": "str",
@@ -2197,7 +2211,8 @@
         "y": 2280,
         "wires": [
             [
-                "ba49550494cbf9bd"
+                "849c92f76f93835e",
+                "20c0d53e90a82e6f"
             ]
         ]
     },
@@ -2218,24 +2233,25 @@
         "options": [
             {
                 "label": "Continuos",
-                "value": true,
-                "type": "bool"
+                "value": 1,
+                "type": "num"
             },
             {
                 "label": "Repeat On-Off",
-                "value": false,
-                "type": "bool"
+                "value": 0,
+                "type": "num"
             }
         ],
         "payload": "",
-        "topic": "190622R/buzzer_type",
+        "topic": "",
         "topicType": "str",
         "className": "",
         "x": 410,
         "y": 2340,
         "wires": [
             [
-                "cf901411791e6376"
+                "44669ba5819ed926",
+                "20c0d53e90a82e6f"
             ]
         ]
     },
@@ -2254,7 +2270,7 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "10",
+        "payload": "1000",
         "payloadType": "num",
         "x": 210,
         "y": 2220,
@@ -2304,8 +2320,8 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "false",
-        "payloadType": "bool",
+        "payload": "0",
+        "payloadType": "num",
         "x": 210,
         "y": 2340,
         "wires": [
@@ -2313,45 +2329,6 @@
                 "3ac2a97e245d19b0"
             ]
         ]
-    },
-    {
-        "id": "1611a2a98624e994",
-        "type": "link out",
-        "z": "9fc70cf43a34da9e",
-        "name": "buzzer_delay_out",
-        "mode": "link",
-        "links": [
-            "856df2095393af2b"
-        ],
-        "x": 585,
-        "y": 2220,
-        "wires": []
-    },
-    {
-        "id": "ba49550494cbf9bd",
-        "type": "link out",
-        "z": "9fc70cf43a34da9e",
-        "name": "buzzer_freq_out",
-        "mode": "link",
-        "links": [
-            "856df2095393af2b"
-        ],
-        "x": 585,
-        "y": 2280,
-        "wires": []
-    },
-    {
-        "id": "cf901411791e6376",
-        "type": "link out",
-        "z": "9fc70cf43a34da9e",
-        "name": "buzzer_type_out",
-        "mode": "link",
-        "links": [
-            "856df2095393af2b"
-        ],
-        "x": 585,
-        "y": 2340,
-        "wires": []
     },
     {
         "id": "191097676757f535",
@@ -2379,8 +2356,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 970,
-        "y": 2220,
+        "x": 410,
+        "y": 2600,
         "wires": [
             [
                 "c6c8c015e3aee5eb"
@@ -2413,8 +2390,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 960,
-        "y": 2280,
+        "x": 400,
+        "y": 2660,
         "wires": [
             [
                 "51c1344acc01916f"
@@ -2447,8 +2424,8 @@
         "offcolor": "",
         "animate": false,
         "className": "",
-        "x": 980,
-        "y": 2340,
+        "x": 420,
+        "y": 2720,
         "wires": [
             [
                 "d87793834eb0a7a4"
@@ -2472,8 +2449,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 770,
-        "y": 2220,
+        "x": 210,
+        "y": 2600,
         "wires": [
             [
                 "191097676757f535"
@@ -2510,8 +2487,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 2220,
+        "x": 630,
+        "y": 2600,
         "wires": [
             [
                 "619c4fd36e2f5f27"
@@ -2535,8 +2512,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 770,
-        "y": 2280,
+        "x": 210,
+        "y": 2660,
         "wires": [
             [
                 "04804074950a4e28"
@@ -2560,8 +2537,8 @@
         "topic": "",
         "payload": "true",
         "payloadType": "bool",
-        "x": 770,
-        "y": 2340,
+        "x": 210,
+        "y": 2720,
         "wires": [
             [
                 "477472509c06e55e"
@@ -2598,8 +2575,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 2280,
+        "x": 630,
+        "y": 2660,
         "wires": [
             [
                 "619c4fd36e2f5f27"
@@ -2612,8 +2589,8 @@
         "z": "9fc70cf43a34da9e",
         "name": "Change Visibility",
         "events": "all",
-        "x": 1440,
-        "y": 2280,
+        "x": 880,
+        "y": 2660,
         "wires": [
             []
         ]
@@ -2648,8 +2625,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 2340,
+        "x": 630,
+        "y": 2720,
         "wires": [
             [
                 "619c4fd36e2f5f27"
@@ -2661,7 +2638,7 @@
         "type": "function",
         "z": "9fc70cf43a34da9e",
         "name": "Sync Alarms",
-        "func": "if (msg.payload == 0) {\n    msg.payload == 0;\n    return msg;\n}\n",
+        "func": "if (msg.payload == 0) {\n    return msg;\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2674,6 +2651,162 @@
                 "40e2022084843a44",
                 "4565835e8865e793",
                 "2568156f3c50e4be"
+            ]
+        ]
+    },
+    {
+        "id": "2ddb39d2465a647c",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 2220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "849c92f76f93835e",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Frequency",
+        "rules": [
+            {
+                "t": "set",
+                "p": "freq",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 2280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "44669ba5819ed926",
+        "type": "change",
+        "z": "9fc70cf43a34da9e",
+        "name": "Set Type",
+        "rules": [
+            {
+                "t": "set",
+                "p": "type",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 2340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa6ce25c02e2806e",
+        "type": "inject",
+        "z": "9fc70cf43a34da9e",
+        "name": "Trigger Sync",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 380,
+        "y": 2420,
+        "wires": [
+            [
+                "20c0d53e90a82e6f"
+            ]
+        ]
+    },
+    {
+        "id": "20c0d53e90a82e6f",
+        "type": "function",
+        "z": "9fc70cf43a34da9e",
+        "name": "Process Settings",
+        "func": "let delay = flow.get(\"delay\").toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });;\nlet freq = flow.get(\"freq\").toLocaleString('en-US', { minimumIntegerDigits: 5, useGrouping: false });;\nlet type = flow.get(\"type\").toString();\n\nmsg.payload = delay + freq + type;\nmsg.topic = \"190622R/settings\";\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nflow.set(\"delay\", 10);\nflow.set(\"freq\", 250);\nflow.set(\"type\", 0);",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 2420,
+        "wires": [
+            [
+                "a35e53b38d8530ea"
+            ]
+        ]
+    },
+    {
+        "id": "a35e53b38d8530ea",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "856df2095393af2b"
+        ],
+        "x": 865,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "e60ca9f42b47fce6",
+        "type": "link out",
+        "z": "9fc70cf43a34da9e",
+        "name": "switch_back",
+        "mode": "link",
+        "links": [
+            "23d6ca8b9712da67"
+        ],
+        "x": 450,
+        "y": 1460,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "23d6ca8b9712da67",
+        "type": "link in",
+        "z": "9fc70cf43a34da9e",
+        "name": "link in 4",
+        "links": [
+            "e60ca9f42b47fce6"
+        ],
+        "x": 185,
+        "y": 80,
+        "wires": [
+            [
+                "beca1c88f0500908"
             ]
         ]
     }
