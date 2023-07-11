@@ -11,6 +11,7 @@
 #define LDR_PIN 34
 #define SERVO_PIN 18
 #define BUZZER_PIN 15
+#define BUTTON_PIN 12
 
 // Channels
 #define BUZZER_CHANNEL 2
@@ -57,6 +58,9 @@ int buzzerDelay = 1000;
 int buzzerFrequency = 256;
 int buzzerType = 0;
 float intensity;
+volatile unsigned long lastDebounceTime = 0;
+const unsigned long debounceDelay = 100;   
+bool isChangedmainSwitch = false;
 
 // Objects
 DHTesp dhtSensor;
@@ -144,7 +148,7 @@ void mqttCallback(char *topic, byte *payload, unsigned int length) {
                             payloadStr.substring(8, 10).toInt(),
                             payloadStr.substring(10, 12).toInt(),
                             payloadStr.substring(12, 14).toInt()));
-        }
+    }
 }
 
 void mqttInit() {
@@ -196,6 +200,10 @@ void mqttLoop() {
             delay(5000);
             lcd.clear();
         }
+    }
+    if (isChangedmainSwitch) {
+        mqttClient.publish(switchBackTopic, String(mainSwitch).c_str());
+        isChangedmainSwitch = false;
     }
     mqttClient.loop();
 }
@@ -397,15 +405,30 @@ void rtcInit() {
     }
 }
 
+//////////////////// BUTTON ////////////////////
+void IRAM_ATTR buttonInterrupt() {
+    if ((millis() - lastDebounceTime) > debounceDelay) {
+        mainSwitch = 0;
+        isChangedmainSwitch = true;
+    }
+    lastDebounceTime = millis();
+}
+
+void buttonInit() {
+    pinMode(BUTTON_PIN, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(BUTTON_PIN), buttonInterrupt, RISING);
+}
+
 //////////////////// SETUP ////////////////////
 void setup() {
     // Init Serial
-    // Serial.begin(115200);
-    // delay(10);
+    Serial.begin(115200);
+    delay(10);
 
     // Init Objects
     rtcInit();
     lcdInit();
+    buttonInit();
     dhtInit();
     ldrInit();
     mqttInit();
